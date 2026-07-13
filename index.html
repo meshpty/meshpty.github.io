@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MeshPTY — Comunidad de usuarios de Meshtastic en Panamá</title>
+<meta name="description" content="MeshPTY es la comunidad independiente de usuarios de Meshtastic en Panamá. Mensajería por radio LoRa, sin internet y sin operador. Aprende a armar tu nodo y únete a la malla.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="MeshPTY — Comunidad de usuarios de Meshtastic en Panamá">
+<meta property="og:description" content="Mensajería por radio LoRa. Sin internet, sin operador, sin cuota mensual. La malla panameña ya está viva.">
+<meta property="og:locale" content="es_PA">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#14181c">
+<meta property="og:site_name" content="MeshPTY">
+<meta property="og:image" content="https://meshpty.github.io/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<a class="skip" href="#main">Saltar al contenido</a>
+
+<nav>
+  <div class="wrap-wide">
+    <a class="brand" href="index.html"><span class="dot"></span>Mesh<b>PTY</b></a>
+    <div class="links">
+      <a href="index.html" aria-current="page">Inicio</a>
+      <a href="comprar.html">Guía de compra</a>
+      <a href="instalar.html">Firmware</a>
+      <a href="nodos-fijos.html">Infraestructura</a>
+      <a href="faq.html">Preguntas</a>
+      <a href="comunidad.html">Comunidad</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+
+<div class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <span class="badge"><span class="live"></span>La malla panameña ya está viva</span>
+      <h1>Mensajería por radio, sin internet.</h1>
+      <p class="lede">
+        MeshPTY es la comunidad de usuarios de <strong>Meshtastic</strong> en Panamá: radios LoRa
+        pequeñas, de bajo consumo, que se enlazan entre sí y reenvían mensajes de nodo en nodo.
+        Sin torres celulares. Sin SIM. Sin cuota mensual.
+      </p>
+      <div class="cta">
+        <a class="btn primary" href="comprar.html">Empieza aquí →</a>
+        <a class="btn" href="comunidad.html">Únete a la comunidad</a>
+      </div>
+    </div>
+
+    <svg class="mesh" viewBox="0 0 400 400" aria-hidden="true" focusable="false">
+      <g class="mesh-links">
+        <line class="idle" x1="60"  y1="90"  x2="120" y2="220"/>
+        <line class="idle" x1="340" y1="110" x2="320" y2="320"/>
+        <line class="idle" x1="70"  y1="340" x2="320" y2="320"/>
+        <line class="idle" x1="200" y1="50"  x2="340" y2="110"/>
+
+        <line class="r1a" x1="70"  y1="340" x2="120" y2="220"/>
+        <line class="r1b" x1="120" y1="220" x2="260" y2="200"/>
+        <line class="r1c" x1="260" y1="200" x2="340" y2="110"/>
+
+        <line class="r2a" x1="60"  y1="90"  x2="200" y2="50"/>
+        <line class="r2b" x1="200" y1="50"  x2="260" y2="200"/>
+        <line class="r2c" x1="260" y1="200" x2="320" y2="320"/>
+      </g>
+
+      <g class="mesh-nodes">
+        <circle class="n-f" cx="70"  cy="340" r="4"/>
+        <circle class="n-d" cx="120" cy="220" r="4"/>
+        <circle class="n-c" cx="340" cy="110" r="4"/>
+        <circle class="n-a" cx="60"  cy="90"  r="4"/>
+        <circle class="n-b" cx="200" cy="50"  r="4"/>
+        <circle class="n-g" cx="320" cy="320" r="4"/>
+      </g>
+
+      <circle class="mesh-hub" cx="260" cy="200" r="7"/>
+
+      <circle class="packet p1" r="3.5"/>
+      <circle class="packet p2" r="3.5"/>
+    </svg>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <h2>Cómo está la red hoy</h2>
+    <p class="sub">
+      Sin exagerar y sin humo: esto es lo que sabemos que hay funcionando. Es una red joven, y eso es
+      precisamente la oportunidad.
+    </p>
+
+    <div class="ledger">
+      <dl>
+        <div class="row">
+          <dt>Nodos vistos en la malla, según el momento</dt>
+          <span class="lead" aria-hidden="true"></span>
+          <dd>32–82</dd>
+        </div>
+        <div class="row">
+          <dt>Nodos fijos conocidos</dt>
+          <span class="lead" aria-hidden="true"></span>
+          <dd>3</dd>
+        </div>
+        <div class="row">
+          <dt>Contacto confirmado más largo · ciudad → San Miguelito</dt>
+          <span class="lead" aria-hidden="true"></span>
+          <dd>9 km</dd>
+        </div>
+        <div class="row">
+          <dt>Cobertura real a nivel de calle, entre edificios</dt>
+          <span class="lead" aria-hidden="true"></span>
+          <dd>pocas calles</dd>
+        </div>
+      </dl>
+    </div>
+
+    <div class="box info" style="margin-top:26px">
+      <h3>Hay más gente de la que parece — pero nadie los ha contado</h3>
+      <p>
+        Ver entre 32 y 82 nodos significa que hay bastante actividad. Lo que no hay es
+        <strong>mapa</strong>: no sabemos quiénes son, dónde están, ni hasta dónde llega realmente la
+        cobertura.
+      </p>
+      <p>
+        <strong>Si ya tienes un nodo encendido: eres parte de esto y no lo sabemos.</strong>
+        <a href="mapa.html">Regístralo</a> — toma dos minutos y es lo más útil que puedes hacer hoy por
+        la comunidad.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>¿Qué es Meshtastic?</h2>
+    <p class="sub">
+      Un nodo es un aparatito del tamaño de una caja de fósforos. Se conecta a tu celular por Bluetooth.
+      Tú escribes en la app, el mensaje sale por radio y va saltando de nodo en nodo hasta llegar a su
+      destino. Cada nodo repite lo que oye. Esa es toda la magia.
+    </p>
+
+    <div class="grid g3">
+      <div class="card soft">
+        <h3>Funciona sin señal</h3>
+        <p>
+          No depende de antenas celulares ni de internet. En un cerro, en el mar, en un apagón, o cuando
+          la red se cae: la malla sigue viva.
+        </p>
+      </div>
+      <div class="card soft">
+        <h3>Semanas de batería</h3>
+        <p>
+          Consume muy poco. Un nodo con un panel solar pequeño puede quedarse en un cerro
+          indefinidamente, repitiendo mensajes para todos.
+        </p>
+      </div>
+      <div class="card soft">
+        <h3>Cifrado de punta a punta</h3>
+        <p>
+          Los canales van cifrados con AES-256. Los nodos que reenvían tu mensaje no pueden leerlo — solo
+          lo pasan.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Para qué sirve, aquí, en Panamá</h2>
+    <p class="sub">
+      Meshtastic no reemplaza tu celular. Es otra cosa: comunicación que sigue funcionando cuando el
+      celular no.
+    </p>
+
+    <div class="grid g2">
+      <div class="card">
+        <h3>Senderismo y montaña</h3>
+        <p>
+          Chiriquí, el Valle, Cerro Azul, Camino de Cruces. Donde no hay señal, tu grupo se sigue viendo
+          en el mapa y se puede escribir.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Náutica y costa</h3>
+        <p>
+          Bocas, San Blas, Shelter Bay, la bahía. LoRa sobre agua rinde muchísimo: hay enlaces
+          documentados de decenas de kilómetros con línea de vista limpia.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Cuando se cae la señal</h3>
+        <p>
+          Conciertos, estadios, carnavales: la red celular se satura y no pasa nada. Apagones: la torre
+          se cae. Y en <strong>Bocas del Toro, junio de 2025, una provincia entera se quedó sin telefonía
+          móvil ni internet durante más de una semana.</strong>
+        </p>
+        <p>
+          La malla no depende de ninguna de esas cosas.
+          <a href="sin-senal.html">Los escenarios, con fuentes →</a>
+        </p>
+      </div>
+      <div class="card">
+        <h3>Radioaficionados</h3>
+        <p>
+          Si ya tienes torre, antenas y entiendes de propagación, eres justo la persona que esta red
+          necesita. <a href="comunidad.html#radioaficionados">Te hablamos directo aquí.</a>
+        </p>
+      </div>
+      <div class="card">
+        <h3>Familia y amigos</h3>
+        <p>
+          Un <strong>canal privado propio</strong> para tu gente: mensajería y posición en el mapa entre
+          ustedes, sin internet, sin operador, y sin que nadie de afuera pueda escribirles ni leerlos.
+          Útil para coordinar una salida, un grupo en la montaña, o simplemente saber que los demás van
+          llegando.
+        </p>
+        <p>
+          <strong>La clave está en el canal:</strong> tiene que ser uno privado con su propia clave, no
+          el público. <a href="faq.html">Te explicamos por qué y cómo →</a>
+        </p>
+      </div>
+      <div class="card">
+        <h3>Y es legal</h3>
+        <p>
+          La banda 902–928 MHz es de <strong>uso libre</strong> en Panamá según el PNAF de la ASEP. Sin
+          licencia, sin trámite, sin cánones.
+          <a href="legal.html">Ver la regulación y sus fuentes →</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>De cero a tu primer mensaje</h2>
+    <p class="sub">
+      Presupuesto realista: <strong>US$35 – 60</strong> por nodo. El proceso completo toma una tarde, y
+      buena parte de eso es esperar el casillero.
+    </p>
+
+    <ol class="steps">
+      <li>
+        <h3>Compra dos nodos, no uno</h3>
+        <p>
+          Uno <em>companion</em> que anda contigo, y uno <strong>fijo en casa</strong>, lo más alto
+          posible. Con un solo nodo la experiencia es mala; con dos empieza a tener sentido.
+          <strong>Y tiene que ser la versión de 915 MHz</strong> — la de 868 MHz es europea y no
+          funciona aquí.
+          <br><a href="comprar.html">Ver la guía de compra →</a>
+        </p>
+      </li>
+      <li>
+        <h3>Instala el firmware desde el navegador</h3>
+        <p>
+          Se hace en <strong><a href="https://flasher.meshtastic.org" target="_blank" rel="noopener">flasher.meshtastic.org</a></strong>,
+          sin instalar nada y sin saber programar. Después aplicas la configuración estándar de MeshPTY,
+          que es lo que hace que todos nos veamos entre sí.
+          <br><a href="instalar.html">Ver la guía de firmware →</a>
+        </p>
+      </li>
+      <li>
+        <h3>Preséntate en la malla</h3>
+        <p>
+          Escribe en el canal público y di quién eres y de qué zona. Y avísanos en el
+          <a href="comunidad.html">grupo</a> para confirmar que estás llegando a alguien.
+        </p>
+      </li>
+      <li>
+        <h3>Registra tu nodo</h3>
+        <p>
+          Si tu nodo va a quedarse fijo en un sitio, dinos dónde. Así sabemos dónde hay cobertura y dónde
+          hace falta el siguiente repetidor. Hay formas de hacerlo
+          <a href="nodos-fijos.html#privacidad">sin revelar tu dirección exacta</a>.
+        </p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>La configuración estándar, en corto</h2>
+    <p class="sub">
+      Para que dos nodos se hablen tienen que coincidir en región, preset y canal. No es una sugerencia:
+      es un requisito físico. Esto es lo que usa la malla panameña hoy.
+    </p>
+
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead>
+          <tr><th scope="col">Parámetro</th><th scope="col">Valor</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Región LoRa</td><td><strong><code>US</code></strong></td></tr>
+          <tr><td>Modem preset</td><td><strong><code>LONG_FAST</code></strong></td></tr>
+          <tr><td>Canal primario</td><td><strong><code>LongFast</code></strong> — el canal público, sin clave propia</td></tr>
+          <tr><td>Slot / frecuencia</td><td><strong>20 · 906.875 MHz</strong> — se calcula solo, no lo toques</td></tr>
+          <tr><td>Potencia máxima (ASEP)</td><td><strong>30 dBm</strong> TX · <strong>36 dBm</strong> de PIRE — <a href="legal.html">ver regulación</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box ok">
+      <h3>La buena noticia: eso es el valor por defecto</h3>
+      <p>
+        Un nodo recién flasheado ya viene en <code>LONG_FAST</code>, en el canal <code>LongFast</code>.
+        Lo <em>único</em> que tienes que cambiar a mano es la <strong>región a <code>US</code></strong>, y
+        el slot 20 aparece solo.
+      </p>
+      <p class="mb0">
+        En serio: pon la región y no toques nada más. <a href="instalar.html">Guía paso a paso →</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Lo que más falta ahora mismo</h2>
+    <p class="sub">
+      Una malla se muere cuando alguien enciende su primer nodo, no ve a nadie, y guarda el aparato en
+      una gaveta. Todo esto existe para evitar exactamente eso.
+    </p>
+
+    <div class="grid g2">
+      <div class="card">
+        <h3>Nodos en altura</h3>
+        <p>
+          Un solo nodo bien ubicado vale por veinte a nivel de calle. Cerro Ancón, Cerro Azul, Cerro
+          Campana, y los pisos altos de Costa del Este, Punta Pacífica o Avenida Balboa. Si tienes acceso
+          a un techo con vista despejada, eres la persona más importante de esta comunidad.
+          <a href="nodos-fijos.html">Cómo montar uno →</a>
+        </p>
+      </div>
+      <div class="card">
+        <h3>Que la gente registre lo que ya tiene</h3>
+        <p>
+          Sospechamos que hay más nodos de los que sabemos. Sin mapa, cada persona nueva llega a ciegas y
+          cree que está sola. <a href="mapa.html">Registra el tuyo →</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div class="col">
+        <h4>Empezar</h4>
+        <a href="comprar.html">Guía de compra</a>
+        <a href="instalar.html">Firmware y configuración</a>
+        <a href="faq.html">Preguntas frecuentes</a>
+      </div>
+      <div class="col">
+        <h4>La red</h4>
+        <a href="nodos-fijos.html">Infraestructura</a>
+        <a href="mapa.html">Mapa y cobertura</a>
+        <a href="sin-senal.html">Cuando se cae la señal</a>
+        <a href="legal.html">Regulación (ASEP)</a>
+        <a href="comunidad.html">Comunidad</a>
+      </div>
+      <div class="col">
+        <h4>Oficial</h4>
+        <a href="https://meshtastic.org" target="_blank" rel="noopener">meshtastic.org</a>
+        <a href="https://meshtastic.org/docs/getting-started/" target="_blank" rel="noopener">Documentación</a>
+        <a href="https://flasher.meshtastic.org" target="_blank" rel="noopener">Flasher web</a>
+      </div>
+    </div>
+
+    <div class="fine">
+      <p>
+        <strong>MeshPTY</strong> — comunidad independiente de usuarios en Panamá.
+        Contacto: <a href="mailto:alvaroenoht@gmail.com">alvaroenoht@gmail.com</a>
+      </p>
+      <p>
+        MeshPTY es un grupo comunitario independiente y sin fines de lucro. <strong>No está afiliado,
+        patrocinado ni respaldado por Meshtastic LLC.</strong> Meshtastic® es una marca registrada de
+        Meshtastic LLC. Este sitio hace uso nominativo de la marca únicamente para identificar el software
+        del que somos usuarios.
+      </p>
+      <p>
+        Cada usuario es responsable de operar dentro de los límites de potencia y las bandas de frecuencia
+        permitidas por la <strong>ASEP</strong> en la República de Panamá.
+      </p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

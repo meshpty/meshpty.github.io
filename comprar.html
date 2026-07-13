@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guía de compra — MeshPTY</title>
+<meta name="description" content="Qué nodo Meshtastic comprar en Panamá, cuánto cuesta, cómo traerlo por casillero y qué NO comprar. Guía práctica de MeshPTY.">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#14181c">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MeshPTY">
+<meta property="og:title" content="Guía de compra — MeshPTY">
+<meta property="og:description" content="Qué nodo Meshtastic comprar en Panamá, cuánto cuesta, cómo traerlo por casillero y qué NO comprar. Guía práctica de MeshPTY.">
+<meta property="og:image" content="https://meshpty.github.io/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<a class="skip" href="#main">Saltar al contenido</a>
+
+<nav>
+  <div class="wrap-wide">
+    <a class="brand" href="index.html"><span class="dot"></span>Mesh<b>PTY</b></a>
+    <div class="links">
+      <a href="index.html">Inicio</a>
+      <a href="comprar.html" aria-current="page">Guía de compra</a>
+      <a href="instalar.html">Firmware</a>
+      <a href="nodos-fijos.html">Infraestructura</a>
+      <a href="faq.html">Preguntas</a>
+      <a href="comunidad.html">Comunidad</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+
+<div class="phead">
+  <div class="wrap">
+    <span class="eyebrow">Guía · paso 1 de 3</span>
+    <h1>Guía de compra</h1>
+    <p>
+      Qué comprar exactamente, cuánto cuesta, cómo traerlo a Panamá — y sobre todo, qué
+      <em>no</em> comprar.
+    </p>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+
+    <div class="box stop">
+      <h3>Antes que nada: 915 MHz. No 868.</h3>
+      <p class="mb0">
+        Casi todas las placas LoRa se venden en dos versiones según la frecuencia. En Panamá usamos la
+        banda de <strong>915 MHz</strong> (región <code>US</code>). Si compras la versión de
+        <strong>868 MHz</strong> — la europea, que muchas veces aparece primero en el listado o sale más
+        barata — <strong>no vas a poder hablar con nadie de la malla panameña</strong>, y no es algo que
+        se arregle por software. Es hardware distinto.
+        <br><br>
+        Este es, por mucho, el error más común de quien empieza. Revisa la variante <em>dos veces</em>
+        antes de darle a comprar.
+      </p>
+    </div>
+
+    <div class="box ok">
+      <h3>Nuestra recomendación: empieza con DOS nodos</h3>
+      <p>
+        Suena a que te queremos vender más. No es eso — es que <strong>con un solo nodo la experiencia es
+        mala</strong>, y con dos empieza a tener sentido de verdad. La configuración ideal para alguien que
+        empieza es esta:
+      </p>
+      <div class="grid g2" style="margin:18px 0">
+        <div class="card">
+          <h3>Un nodo <em>companion</em></h3>
+          <p class="mb0">
+            El que anda contigo: en el bolsillo, en la mochila, en el carro. Emparejado a tu celular por
+            Bluetooth. Es con el que escribes y con el que te diviertes.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Un nodo fijo</h3>
+          <p class="mb0">
+            El que se queda en tu casa — ojalá lo más alto posible: balcón, azotea, ventana con vista. Ese
+            es el que <strong>ayuda a la malla</strong> y el que te deja alcanzarla desde lejos.
+          </p>
+        </div>
+      </div>
+      <p class="mb0">
+        <strong>Por qué funciona tan bien:</strong> tu nodo fijo te sirve de puente. Cuando andas por ahí
+        con el companion, alcanzas tu propio nodo de casa, y desde ahí entras a la malla. Y de paso, tu
+        nodo fijo ayuda a todos los vecinos que están encerrados en un primer piso.
+        <a href="nodos-fijos.html">Cómo montar el fijo →</a>
+      </p>
+    </div>
+
+    <h2>Qué es un nodo, en partes</h2>
+    <p class="sub">Tres cosas. Muchos kits ya vienen con las tres.</p>
+
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead>
+          <tr><th scope="col">Pieza</th><th scope="col">Para qué</th><th scope="col">Nota</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Placa LoRa</strong></td>
+            <td>El radio y el cerebro. Es lo que flasheas con Meshtastic.</td>
+            <td>Versión <strong>915 MHz</strong>, siempre.</td>
+          </tr>
+          <tr>
+            <td><strong>Antena</strong></td>
+            <td>Determina tu alcance más que cualquier otra cosa.</td>
+            <td>La que viene en la caja es mediocre. Mejorarla es el upgrade más barato que existe.</td>
+          </tr>
+          <tr>
+            <td><strong>Batería</strong></td>
+            <td>Para que no viva enchufado.</td>
+            <td>Li-ion 18650, o una LiPo con conector JST según la placa.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box warn">
+      <h3>Nunca enciendas la placa sin antena</h3>
+      <p class="mb0">
+        Transmitir sin antena conectada puede dañar el módulo de radio de forma permanente. Conecta la
+        antena <em>antes</em> de darle corriente. Siempre.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Qué comprar</h2>
+    <p class="sub">
+      Dos caminos: <strong>placas para armar</strong> (más baratas, más flexibles) o <strong>equipos listos
+      para usar</strong> (más caros, funcionan el día uno). Los dos son válidos — depende de si te gusta
+      cacharrear o solo quieres estar en la malla.
+    </p>
+
+    <h3>Placas para armar</h3>
+    <div class="grid g3">
+      <div class="card">
+        <h3>Heltec V3 / V4</h3>
+        <p><strong>La opción clásica para empezar.</strong></p>
+        <p>
+          Barata, compacta, con pantallita OLED, muy bien soportada. No trae GPS — pero tu celular le
+          presta el suyo por Bluetooth, que para la mayoría basta. El <strong>V4</strong> es la versión más
+          reciente; el <strong>V3</strong> sigue siendo válido y tiene más guías escritas.
+        </p>
+        <p class="small"><strong>~US$25 – 35</strong> · Pide la variante <strong>915 MHz</strong></p>
+      </div>
+
+      <div class="card">
+        <h3>LilyGO T-Supreme</h3>
+        <p><strong>Si quieres GPS propio y más músculo.</strong></p>
+        <p>
+          El hermano mayor del T-Beam: GPS integrado, portapilas 18650, mejor construido. Es el que quieres
+          si tu nodo se va a mover de verdad — senderismo, carro, bote.
+        </p>
+        <p class="small"><strong>~US$45 – 65</strong> · Pide la variante <strong>915 MHz</strong></p>
+      </div>
+
+      <div class="card">
+        <h3>RAK WisBlock</h3>
+        <p><strong>Para el nodo fijo y solar.</strong></p>
+        <p>
+          Procesador <strong>nRF52840</strong>: consumo bajísimo. Modular, pensado para quedarse meses en un
+          techo sin que nadie lo toque. <a href="nodos-fijos.html#hardware">Más sobre esto →</a>
+        </p>
+        <p class="small"><strong>~US$40 – 60</strong> · Pide la variante <strong>915 MHz</strong></p>
+      </div>
+    </div>
+
+    <h3 style="margin-top:36px">Listos para usar — sin armar nada</h3>
+    <div class="grid g3">
+      <div class="card soft">
+        <h3>SenseCAP Card Tracker</h3>
+        <p><strong>El mejor companion, sin discusión.</strong></p>
+        <p>
+          Del tamaño de una tarjeta, con GPS, batería y antena adentro. Lo enciendes y ya está. Consumo
+          bajísimo. Lo echas en la mochila y te olvidas de él.
+        </p>
+        <p class="mb0 small"><strong>Ideal como tu nodo personal.</strong></p>
+      </div>
+
+      <div class="card soft">
+        <h3>M5Stack Cardputer ADV + hat LoRa</h3>
+        <p><strong>El divertido — y funcional de verdad.</strong></p>
+        <p>
+          Trae <strong>teclado y pantalla propios</strong>: puedes escribir mensajes <em>sin celular</em>.
+          Es la respuesta a "¿y si no tengo el teléfono a mano?". Con su hat de LoRa corre Meshtastic.
+        </p>
+        <p class="mb0 small">Ojo: hay que pedir el hat de LoRa aparte.</p>
+      </div>
+
+      <div class="card soft">
+        <h3>Nodos solares SenseCAP</h3>
+        <p><strong>El nodo fijo, resuelto.</strong></p>
+        <p>
+          Caja, panel, batería y radio, todo integrado y probado. <strong>Ya hay varios funcionando en
+          Panamá.</strong> Más caro, pero lo subes al techo y funciona.
+        </p>
+        <p class="mb0 small">Sin pelearte con cajas ni conectores.</p>
+      </div>
+    </div>
+
+    <div class="box info">
+      <h3>Dos combinaciones que funcionan</h3>
+      <p>Siguiendo la recomendación de los dos nodos (companion + fijo):</p>
+      <ul class="plain">
+        <li>
+          <strong>Ruta económica y cacharreable:</strong> un <strong>Heltec V3/V4</strong> como companion +
+          un <strong>RAK WisBlock</strong> como nodo fijo solar.
+        </li>
+        <li>
+          <strong>Ruta sin dolores de cabeza:</strong> un <strong>SenseCAP Card Tracker</strong> como
+          companion + un <strong>nodo solar SenseCAP</strong> como fijo. Más caro, cero fricción.
+        </li>
+      </ul>
+      <p class="mb0">
+        <strong>No sobrepienses la primera compra.</strong> Lo importante es tener algo encendido y estar en
+        la malla — todo lo que compres ahora lo vas a reutilizar después.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Cómo traerlo a Panamá</h2>
+
+    <h3>Casillero desde Amazon</h3>
+    <p class="muted">
+      Es lo que usa la comunidad hoy. Compras en Amazon, lo mandas a tu casillero en Miami y llega en unos
+      días. Suele ser lo más rápido y lo más predecible.
+    </p>
+
+    <h3>AliExpress</h3>
+    <p class="muted">
+      Más barato, especialmente si compras varias placas de una vez. La contra: se tarda semanas, y hay más
+      riesgo de que te manden la variante de frecuencia equivocada. Si vas por esta ruta,
+      <strong>revisa la variante de 915 MHz con lupa</strong> antes de pagar.
+    </p>
+
+    <div class="box info">
+      <h3>Aprovecha el envío</h3>
+      <p class="mb0">
+        Ya que vas a pagar casillero, <strong>trae los dos nodos de una vez</strong> — y de paso los
+        conectores JST y el pigtail, que <a href="nodos-fijos.html#hardware">no se consiguen aquí</a>. Nada
+        peor que tener el proyecto detenido tres semanas esperando una piecita de un dólar.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>La antena: donde de verdad se gana alcance</h2>
+    <p class="sub">
+      La gente gasta de más en la placa y de menos en la antena. Es al revés: <strong>la antena y la
+      altura</strong> son lo que decide si llegas a 500 metros o a 15 kilómetros.
+    </p>
+
+    <ul class="check">
+      <li><strong>Sube de la antena de fábrica.</strong> Una antena de 915 MHz decente cuesta poco y te cambia la vida.</li>
+      <li><strong>Vertical y despejada.</strong> LoRa va con polarización vertical. Una antena acostada pierde muchísimo.</li>
+      <li><strong>La altura le gana a los vatios.</strong> Subir la antena tres metros hace más que cualquier upgrade de potencia.</li>
+      <li><strong>Cable corto y bueno.</strong> Si la antena va lejos del radio, el cable barato se come la señal antes de que salga. <a href="nodos-fijos.html">RG178 vs RG316 →</a></li>
+    </ul>
+
+    <div class="box warn">
+      <h3>La antena tiene que ser de 915 MHz también</h3>
+      <p class="mb0">
+        Una antena de 433 MHz o de 868 MHz físicamente entra en el conector, pero está sintonizada para otra
+        frecuencia y va a rendir mal. Revisa la banda, no solo el conector.
+      </p>
+    </div>
+
+    <div class="box info">
+      <h3>Hay un techo legal: 6 dBi de ganancia</h3>
+      <p>
+        El PNAF de la ASEP permite hasta <strong>6 dBi de ganancia de antena</strong> en esta banda, con un
+        máximo de <strong>36 dBm de PIRE</strong>. Para la inmensa mayoría de la gente esto no cambia nada:
+        <strong>una antena de hasta 6 dBi con una placa común te deja muy por debajo del límite.</strong>
+      </p>
+      <p class="mb0">
+        Solo importa si te vas a una antena de <strong>8, 10 o 12 dBi</strong> — típicas en torres. En ese
+        caso hay que bajar la potencia de transmisión para compensar. Es una cuenta simple y la explicamos en
+        la <a href="legal.html">página de regulación</a>.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Lista rápida antes de pagar</h2>
+    <ul class="check">
+      <li>La variante dice <strong>915 MHz</strong> (o <strong>US915</strong> / <strong>US</strong>)</li>
+      <li>Viene con antena — o ya pediste una aparte</li>
+      <li>Tienes cómo alimentarlo (batería o USB)</li>
+      <li>Si vas por los dos nodos: uno <em>companion</em> y uno para dejar fijo</li>
+      <li>Si el fijo es solar: pediste también los <strong>conectores JST</strong> y el <strong>pigtail</strong></li>
+    </ul>
+
+    <ul class="cross">
+      <li>No compraste <strong>868 MHz</strong> por error</li>
+      <li>No compraste un gateway de <strong>LoRaWAN</strong> — eso es otra cosa distinta y no sirve para Meshtastic</li>
+      <li>No compraste un panel solar de <strong>6 V</strong> — <a href="nodos-fijos.html#hardware">recalienta el nodo</a></li>
+    </ul>
+
+    <div class="box info">
+      <h3>¿Vas a montar un nodo fijo o solar?</h3>
+      <p class="mb0">
+        Entonces esta página se te queda corta. Hay cosas que <strong>no se consiguen en Panamá</strong> y
+        tienes que pedirlas junto con el nodo (conectores JST), decisiones que cambian todo el diseño
+        (nRF52840 vs ESP32), y errores que recalientan el equipo (paneles de 6 V).
+        <br><br>
+        <strong><a href="nodos-fijos.html#hardware">Lee la guía de hardware para nodos fijos antes de comprar →</a></strong>
+      </p>
+    </div>
+
+    <hr class="rule">
+
+    <div class="cta">
+      <a class="btn primary" href="instalar.html">Siguiente: instalar y configurar →</a>
+      <a class="btn" href="comunidad.html">Pregúntanos antes de comprar</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div class="col">
+        <h4>Empezar</h4>
+        <a href="comprar.html">Guía de compra</a>
+        <a href="instalar.html">Firmware y configuración</a>
+        <a href="faq.html">Preguntas frecuentes</a>
+      </div>
+      <div class="col">
+        <h4>La red</h4>
+        <a href="nodos-fijos.html">Infraestructura</a>
+        <a href="mapa.html">Mapa y cobertura</a>
+        <a href="sin-senal.html">Cuando se cae la señal</a>
+        <a href="legal.html">Regulación (ASEP)</a>
+        <a href="comunidad.html">Comunidad</a>
+      </div>
+      <div class="col">
+        <h4>Oficial</h4>
+        <a href="https://meshtastic.org" target="_blank" rel="noopener">meshtastic.org</a>
+        <a href="https://meshtastic.org/docs/hardware/devices/" target="_blank" rel="noopener">Lista de hardware</a>
+        <a href="https://flasher.meshtastic.org" target="_blank" rel="noopener">Flasher web</a>
+      </div>
+    </div>
+
+    <div class="fine">
+      <p>
+        <strong>MeshPTY</strong> — comunidad independiente de usuarios en Panamá.
+        Contacto: <a href="mailto:alvaroenoht@gmail.com">alvaroenoht@gmail.com</a>
+      </p>
+      <p>
+        MeshPTY es un grupo comunitario independiente y sin fines de lucro. <strong>No está afiliado,
+        patrocinado ni respaldado por Meshtastic LLC.</strong> Meshtastic® es una marca registrada de
+        Meshtastic LLC. No vendemos hardware ni recibimos comisión por ninguna de las recomendaciones de
+        esta página.
+      </p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Firmware y configuración — MeshPTY</title>
+<meta name="description" content="Cómo flashear tu nodo Meshtastic desde el navegador y aplicar la configuración estándar de la malla panameña: región US, LONG_FAST, canal LongFast, slot 20.">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#14181c">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MeshPTY">
+<meta property="og:title" content="Firmware y configuración — MeshPTY">
+<meta property="og:description" content="Cómo flashear tu nodo Meshtastic desde el navegador y aplicar la configuración estándar de la malla panameña: región US, LONG_FAST, canal LongFast, slot 20.">
+<meta property="og:image" content="https://meshpty.github.io/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<a class="skip" href="#main">Saltar al contenido</a>
+
+<nav>
+  <div class="wrap-wide">
+    <a class="brand" href="index.html"><span class="dot"></span>Mesh<b>PTY</b></a>
+    <div class="links">
+      <a href="index.html">Inicio</a>
+      <a href="comprar.html">Guía de compra</a>
+      <a href="instalar.html" aria-current="page">Firmware</a>
+      <a href="nodos-fijos.html">Infraestructura</a>
+      <a href="faq.html">Preguntas</a>
+      <a href="comunidad.html">Comunidad</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+
+<div class="phead">
+  <div class="wrap">
+    <span class="eyebrow">Guía · paso 2 de 3</span>
+    <h1>Firmware y configuración</h1>
+    <p>
+      Del paquete recién abierto a tu primer mensaje en la malla. No necesitas saber programar ni
+      instalar nada en tu computadora.
+    </p>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="box ok mt0">
+      <h3>El flasher se abre en el navegador</h3>
+      <p class="flasher-url">
+        <a href="https://flasher.meshtastic.org" target="_blank" rel="noopener">flasher.meshtastic.org</a>
+      </p>
+      <p class="mb0">
+        Conectas la placa por USB, abres esa dirección en <strong>Chrome o Edge</strong>, y el firmware se
+        instala solo. No hay nada que descargar, ni drivers, ni línea de comandos.
+        <strong>Firefox y Safari no sirven para esto</strong> — no soportan la API que el navegador necesita
+        para hablarle al puerto USB.
+      </p>
+    </div>
+
+    <h2>La configuración estándar MeshPTY</h2>
+    <p class="sub">
+      Esto es lo que usa la malla panameña hoy. Para que dos nodos se hablen tienen que coincidir
+      en <strong>región, preset y canal</strong>. No es una convención social — es física. Si tu
+      configuración no cuadra con la del resto, tu nodo transmite al vacío y tú crees que
+      Meshtastic no sirve.
+    </p>
+
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead>
+          <tr><th scope="col">Parámetro</th><th scope="col">Valor</th><th scope="col">¿Hay que tocarlo?</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Región LoRa</td>
+            <td><strong><code>US</code></strong></td>
+            <td><strong>Sí — es lo único.</strong></td>
+          </tr>
+          <tr>
+            <td>Modem preset</td>
+            <td><strong><code>LONG_FAST</code></strong></td>
+            <td>No. Ya viene así.</td>
+          </tr>
+          <tr>
+            <td>Canal primario</td>
+            <td><strong><code>LongFast</code></strong> (público, sin clave propia)</td>
+            <td>No. Ya viene así.</td>
+          </tr>
+          <tr>
+            <td>Slot / frecuencia</td>
+            <td><strong>20</strong> · <strong>906.875 MHz</strong></td>
+            <td>No. Se calcula solo a partir del nombre del canal.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box ok">
+      <h3>Resumen honesto: cambia la región y no toques nada más</h3>
+      <p class="mb0">
+        Un nodo recién flasheado ya viene en <code>LONG_FAST</code> y en el canal <code>LongFast</code>.
+        En cuanto pones la región en <code>US</code>, el slot 20 (906.875 MHz) aparece solo.
+        Toda la "configuración" es literalmente un menú desplegable.
+      </p>
+    </div>
+
+    <div class="box info">
+      <h3>¿Y la potencia de transmisión?</h3>
+      <p class="mb0">
+        Déjala como viene. La ASEP permite hasta <strong>30 dBm</strong>, y las placas comunes
+        transmiten a unos <strong>20–22 dBm</strong> — estás muy por debajo del límite sin tener que
+        hacer nada. Esto <em>solo</em> hay que revisarlo si montas una
+        <strong>antena de alta ganancia</strong> (más de 6 dBi) en una torre.
+        <a href="legal.html">Ver la regulación de la ASEP →</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Paso a paso</h2>
+
+    <ol class="steps">
+      <li>
+        <h3>Conecta la antena. Primero. Siempre.</h3>
+        <p>
+          Antes de darle corriente a la placa, atornilla la antena. Encender un radio LoRa sin
+          antena puede quemar el módulo de forma permanente. No hay vuelta atrás en esto.
+        </p>
+      </li>
+
+      <li>
+        <h3>Conecta la placa a la computadora por USB</h3>
+        <p>
+          Usa un cable USB de <strong>datos</strong>, no uno de solo carga. Muchos cables baratos
+          solo cargan y no transmiten datos — si la computadora no detecta la placa, ese suele
+          ser el motivo.
+        </p>
+      </li>
+
+      <li>
+        <h3>Abre el flasher web</h3>
+        <p class="flasher-url">
+          <a href="https://flasher.meshtastic.org" target="_blank" rel="noopener">flasher.meshtastic.org</a>
+        </p>
+        <p>
+          Ábrelo desde <strong>Chrome o Edge</strong>. Escoge tu modelo de placa, dale a conectar,
+          selecciona el puerto que aparece, y flashea la <strong>versión estable</strong>. Tarda un par de
+          minutos y es automático.
+        </p>
+      </li>
+
+      <li>
+        <h3>Instala la app en tu celular</h3>
+        <p>
+          <a href="https://meshtastic.org/downloads/" target="_blank" rel="noopener">Descarga la app oficial</a>
+          para Android o iOS. Es la que vas a usar para escribir mensajes y para configurar el nodo.
+        </p>
+      </li>
+
+      <li>
+        <h3>Emparéjalo por Bluetooth</h3>
+        <p>
+          Abre la app, busca tu nodo y conéctalo. Te va a pedir un código de emparejamiento de
+          6 dígitos — aparece en la pantallita del nodo. Si tu placa no tiene pantalla, el código
+          por defecto suele ser <code>123456</code>.
+        </p>
+      </li>
+
+      <li>
+        <h3>Pon la región en <code>US</code></h3>
+        <p>
+          En la app: <strong>Configuración → Radio → LoRa → Región</strong>. Escoge <code>US</code>.
+          El nodo se reinicia solo.
+          <br><br>
+          <strong>Esto es todo.</strong> El preset, el canal y el slot ya estaban bien por defecto.
+        </p>
+      </li>
+
+      <li>
+        <h3>Ponle un nombre reconocible</h3>
+        <p>
+          En <strong>Configuración → Usuario</strong>. Usa algo que diga quién eres y de dónde,
+          por ejemplo <code>Alvaro-Ancón</code>. Un nodo llamado <code>Meshtastic_a4f2</code> no le
+          dice nada a nadie, y cuando la malla crezca vas a agradecer que la gente se identifique.
+        </p>
+      </li>
+
+      <li>
+        <h3>Di hola</h3>
+        <p>
+          Escribe en el canal público: quién eres y de qué zona transmites. Si alguien te contesta,
+          ya estás en la malla. Si no ves a nadie, sigue leyendo abajo — y avísanos en el
+          <a href="comunidad.html">grupo</a>, que te ayudamos.
+        </p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>No veo a nadie. ¿Qué hice mal?</h2>
+    <p class="sub">
+      Probablemente nada. Repasa esto en orden — el 90% de los casos es uno de los tres primeros.
+    </p>
+
+    <ul class="plain">
+      <li><strong>¿La región está en <code>US</code>?</strong> Si quedó en <code>UNSET</code>, el nodo no transmite. Es el fallo más común de todos.</li>
+      <li><strong>¿La placa es de 915 MHz?</strong> Si compraste la de 868 MHz, no hay configuración que lo arregle. Es hardware distinto.</li>
+      <li><strong>¿El preset quedó en <code>LONG_FAST</code> y el canal en <code>LongFast</code>?</strong> Si alguien te "ayudó" a configurarlo y te cambió esto, quedaste fuera de la malla.</li>
+      <li><strong>¿Estás bajo techo, en un piso bajo, rodeado de concreto?</strong> LoRa atraviesa mucho, pero no todo. Sal al balcón o a la calle y prueba de nuevo.</li>
+      <li><strong>Puede que simplemente no haya nadie cerca todavía.</strong> La malla panameña es joven y la cobertura es despareja. Esto no es tu culpa — y es exactamente por lo que hacen falta <a href="nodos-fijos.html">nodos en altura</a>.</li>
+    </ul>
+
+    <div class="box info">
+      <h3>Escríbenos antes de rendirte</h3>
+      <p class="mb0">
+        Es muy frustrante encender tu primer nodo y no ver nada. Nos ha pasado a todos. Pasa por el
+        <a href="comunidad.html">grupo</a>, di en qué zona estás, y alguien va a poder decirte si
+        deberías estar viendo a alguien desde ahí o no.
+      </p>
+    </div>
+
+    <hr class="rule">
+
+    <div class="cta">
+      <a class="btn primary" href="nodos-fijos.html">Siguiente: nodos fijos y repetidoras →</a>
+      <a class="btn" href="faq.html">Preguntas frecuentes</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div class="col">
+        <h4>Empezar</h4>
+        <a href="comprar.html">Guía de compra</a>
+        <a href="instalar.html">Firmware y configuración</a>
+        <a href="faq.html">Preguntas frecuentes</a>
+      </div>
+      <div class="col">
+        <h4>La red</h4>
+        <a href="nodos-fijos.html">Infraestructura</a>
+        <a href="mapa.html">Mapa y cobertura</a>
+        <a href="sin-senal.html">Cuando se cae la señal</a>
+        <a href="legal.html">Regulación (ASEP)</a>
+        <a href="comunidad.html">Comunidad</a>
+      </div>
+      <div class="col">
+        <h4>Oficial</h4>
+        <a href="https://flasher.meshtastic.org" target="_blank" rel="noopener">Flasher web</a>
+        <a href="https://meshtastic.org/downloads/" target="_blank" rel="noopener">Apps</a>
+        <a href="https://meshtastic.org/docs/configuration/radio/lora/" target="_blank" rel="noopener">Docs · LoRa config</a>
+      </div>
+    </div>
+
+    <div class="fine">
+      <p>
+        <strong>MeshPTY</strong> — comunidad independiente de usuarios en Panamá.
+        Contacto: <a href="mailto:alvaroenoht@gmail.com">alvaroenoht@gmail.com</a>
+      </p>
+      <p>
+        MeshPTY es un grupo comunitario independiente y sin fines de lucro. <strong>No está
+        afiliado, patrocinado ni respaldado por Meshtastic LLC.</strong> Meshtastic® es una marca
+        registrada de Meshtastic LLC. Cada usuario es responsable de operar dentro de los límites
+        permitidos por la <strong>ASEP</strong>.
+      </p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

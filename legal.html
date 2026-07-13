@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Regulación en Panamá (ASEP) — MeshPTY</title>
+<meta name="description" content="Sí, Meshtastic es legal en Panamá. La banda 902–928 MHz es de uso libre según el PNAF de la ASEP. Límites de potencia, ganancia de antena, PIRE y homologación.">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#14181c">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MeshPTY">
+<meta property="og:title" content="Regulación en Panamá (ASEP) — MeshPTY">
+<meta property="og:description" content="Sí, Meshtastic es legal en Panamá. La banda 902–928 MHz es de uso libre según el PNAF de la ASEP. Límites de potencia, ganancia de antena, PIRE y homologación.">
+<meta property="og:image" content="https://meshpty.github.io/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<a class="skip" href="#main">Saltar al contenido</a>
+
+<nav>
+  <div class="wrap-wide">
+    <a class="brand" href="index.html"><span class="dot"></span>Mesh<b>PTY</b></a>
+    <div class="links">
+      <a href="index.html">Inicio</a>
+      <a href="comprar.html">Guía de compra</a>
+      <a href="instalar.html">Firmware</a>
+      <a href="nodos-fijos.html">Infraestructura</a>
+      <a href="faq.html">Preguntas</a>
+      <a href="comunidad.html">Comunidad</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+
+<div class="phead">
+  <div class="wrap">
+    <span class="eyebrow">Referencia · ASEP</span>
+    <h1>Regulación en Panamá</h1>
+    <p>
+      Sí, Meshtastic es legal en Panamá. La banda que usamos es de <strong>uso libre</strong> según el
+      Plan Nacional de Atribución de Frecuencias de la ASEP. Aquí están los límites exactos, y de
+      dónde salen.
+    </p>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+
+    <div class="box ok">
+      <h3>En corto: es legal, no necesitas licencia, no pagas nada</h3>
+      <p class="mb0">
+        El segmento <strong>902 – 928 MHz</strong> está clasificado por la ASEP como
+        <strong>banda de uso libre o no licenciado</strong>, destinada a aplicaciones
+        <strong>Industriales, Científicas y Médicas (ICM)</strong>, con frecuencia central en
+        <strong>915 MHz</strong>. No requiere licencia ni autorización, y está exenta del pago de
+        cánones por uso del espectro.
+      </p>
+    </div>
+
+    <p class="muted">
+      Esto es exactamente lo que hace Meshtastic: modulación digital (LoRa) de baja potencia en la
+      banda ICM de 915 MHz. Y encaja con la región <code>US</code> (902–928 MHz) que usa la malla
+      panameña — no por casualidad, sino porque la regulación panameña de esta banda se alinea con la
+      norteamericana.
+    </p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Los límites técnicos que sí debes respetar</h2>
+    <p class="sub">
+      "Uso libre" no quiere decir "todo vale". Hay tres números que importan.
+    </p>
+
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead>
+          <tr><th scope="col">Parámetro</th><th scope="col">Límite</th><th scope="col">Qué significa en la práctica</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Potencia del transmisor</strong></td>
+            <td><strong>1 W · 30 dBm</strong> máx.</td>
+            <td>
+              Ninguna placa Meshtastic común se acerca. Un Heltec o un T-Beam transmiten alrededor de
+              <strong>20–22 dBm</strong>. Estás muy por debajo del techo sin hacer nada.
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Ganancia de antena</strong></td>
+            <td><strong>6 dBi</strong> máx.</td>
+            <td>
+              Si usas una antena de <em>más</em> de 6 dBi, debes <strong>bajar la potencia del
+              transmisor proporcionalmente</strong>. Aquí es donde la gente se pasa sin darse cuenta.
+            </td>
+          </tr>
+          <tr>
+            <td><strong>PIRE</strong> (potencia radiada)</td>
+            <td><strong>4 W · 36 dBm</strong> máx.</td>
+            <td>
+              Es el número que de verdad manda. Es la suma de lo que sale del radio más lo que
+              amplifica la antena.
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Tecnología</strong></td>
+            <td>Modulación digital o FHSS</td>
+            <td>LoRa es modulación digital. Cumple.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Cómo calcular tu PIRE</h3>
+    <p class="muted">Es una suma, no una multiplicación — los decibelios se suman:</p>
+
+    <div class="box info">
+      <h3>PIRE (dBm) = potencia TX (dBm) + ganancia de antena (dBi) − pérdidas del cable (dB)</h3>
+      <p class="mb0">
+        <strong>Ejemplo típico:</strong> Heltec V3 a 22 dBm + antena de 6 dBi − 1 dB de cable =
+        <strong>27 dBm de PIRE</strong>. Muy por debajo del límite de 36. Puedes dormir tranquilo.
+      </p>
+    </div>
+
+    <div class="box warn">
+      <h3>Ojo si vas a usar una antena de alta ganancia</h3>
+      <p>
+        Las antenas de <strong>8, 10 o 12 dBi</strong> — típicas en torres y en instalaciones de
+        radioaficionados — <strong>superan los 6 dBi que fija el PNAF</strong>. En ese caso hay que
+        reducir la potencia del transmisor de forma proporcional.
+      </p>
+      <p class="mb0">
+        La buena noticia: como las placas Meshtastic transmiten a ~22 dBm y no a 30, tienes bastante
+        margen. Pero <strong>hazlo a propósito</strong>, no por suerte: baja la potencia TX en la
+        configuración de la app hasta que tu PIRE quede dentro del límite. Se ajusta en
+        <strong>Configuración → Radio → LoRa → potencia de transmisión</strong>.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Tus obligaciones como usuario</h2>
+
+    <h3>No tienes protección contra interferencias</h3>
+    <p class="muted">
+      La banda es de <strong>uso compartido</strong>. Eso significa dos cosas, y las dos importan:
+    </p>
+    <ul class="plain">
+      <li><strong>No puedes reclamar</strong> si alguien más te interfiere. Es parte del trato.</li>
+      <li><strong>No puedes interferir</strong> a servicios autorizados. Si tu equipo causa interferencia, el uso debe cesar de inmediato.</li>
+    </ul>
+    <p class="muted">
+      En la práctica, con equipos de baja potencia como los nuestros esto casi nunca es un problema.
+      Pero es la regla, y conviene conocerla.
+    </p>
+
+    <h3>Homologación de equipos</h3>
+    <p class="muted">
+      El PNAF establece que todo equipo transmisor usado bajo esta modalidad debe cumplir con el
+      <strong>procedimiento de homologación de la ASEP</strong>. Vale la pena tenerlo presente, sobre
+      todo si vas a montar instalaciones permanentes o a mover volumen de equipos.
+    </p>
+
+    <h3>Uso comercial: eso ya es otra cosa</h3>
+    <p class="muted">
+      Si alguien usara una red así para <strong>prestar servicios de telecomunicaciones a terceros con
+      fines comerciales</strong>, entonces sí hay que <strong>registrar cada estación transmisora</strong>
+      ante la ASEP.
+    </p>
+    <div class="box info">
+      <h3>Esto no aplica a MeshPTY</h3>
+      <p class="mb0">
+        Somos una comunidad de aficionados. No vendemos servicio, no cobramos, no le prestamos
+        telecomunicaciones a nadie. Estamos en el uso libre, personal y privado que la propia norma
+        contempla. Pero si algún día alguien quiere montar algo comercial sobre esto, ya sabe que la
+        conversación es distinta.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Lo que esto significa para ti, en concreto</h2>
+
+    <ul class="check">
+      <li><strong>No necesitas licencia</strong> ni indicativo ni trámite para tener un nodo.</li>
+      <li><strong>No pagas cánones</strong> por usar el espectro.</li>
+      <li><strong>Región <code>US</code> es la correcta</strong> — 902–928 MHz, y su límite de 30 dBm coincide con el de la ASEP.</li>
+      <li><strong>Con la antena de fábrica o una de hasta 6 dBi, no tienes que pensar en nada más.</strong> Estás dentro, con margen de sobra.</li>
+      <li><strong>Si montas una antena de alta ganancia, baja la potencia TX.</strong> Es el único caso donde de verdad hay que hacer una cuenta.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Fuentes</h2>
+    <p class="sub">
+      No queremos que nos creas por buena fe. Ve al documento.
+    </p>
+
+    <ul class="plain">
+      <li>
+        <strong>Plan Nacional de Atribución de Frecuencias (PNAF)</strong> — ASEP.
+        <a href="https://asep.gob.pa/direcciones/telecomunicaciones/pnaf/" target="_blank" rel="noopener">Página oficial del PNAF →</a>
+      </li>
+      <li>
+        <strong>Resolución AN No. 20335-Telco</strong> del 5 de mayo de 2025, que actualiza el PNAF
+        (Gaceta Oficial No. 30281, 19 de mayo de 2025).
+        <a href="https://asep.gob.pa/an-no-20335-telco-de-2025-05-05/" target="_blank" rel="noopener">Ver en ASEP →</a>
+      </li>
+      <li>
+        <strong>Autoridad Nacional de los Servicios Públicos (ASEP)</strong> —
+        <a href="https://www.asep.gob.pa" target="_blank" rel="noopener">asep.gob.pa</a>
+      </li>
+      <li>
+        <strong>Meshtastic · configuración de LoRa y límites por región</strong> —
+        <a href="https://meshtastic.org/docs/configuration/radio/lora/" target="_blank" rel="noopener">docs oficiales →</a>
+      </li>
+    </ul>
+
+    <div class="box warn">
+      <h3>Un descargo necesario</h3>
+      <p>
+        Esta página es un <strong>resumen divulgativo</strong> hecho por aficionados, no asesoría legal
+        ni regulatoria. No somos abogados ni ingenieros de espectro. La norma vigente es la que dice la
+        ASEP, no la que decimos nosotros — <strong>si algo aquí contradice al PNAF, manda el PNAF</strong>.
+      </p>
+      <p class="mb0">
+        Las normas cambian. Si detectas que algo de esta página quedó desactualizado o mal interpretado,
+        <a href="mailto:alvaroenoht@gmail.com?subject=Corrección%20—%20página%20legal%20MeshPTY">escríbenos y lo corregimos</a>.
+        Preferimos mil veces una corrección incómoda que un dato bonito y falso.
+      </p>
+    </div>
+
+    <hr class="rule">
+
+    <div class="cta">
+      <a class="btn primary" href="comprar.html">Empezar: guía de compra →</a>
+      <a class="btn" href="faq.html">Otras preguntas</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div class="col">
+        <h4>Empezar</h4>
+        <a href="comprar.html">Guía de compra</a>
+        <a href="instalar.html">Firmware y configuración</a>
+        <a href="faq.html">Preguntas frecuentes</a>
+      </div>
+      <div class="col">
+        <h4>La red</h4>
+        <a href="nodos-fijos.html">Infraestructura</a>
+        <a href="mapa.html">Mapa y cobertura</a>
+        <a href="sin-senal.html">Cuando se cae la señal</a>
+        <a href="legal.html">Regulación (ASEP)</a>
+        <a href="comunidad.html">Comunidad</a>
+      </div>
+      <div class="col">
+        <h4>Oficial</h4>
+        <a href="https://asep.gob.pa/direcciones/telecomunicaciones/pnaf/" target="_blank" rel="noopener">ASEP · PNAF</a>
+        <a href="https://meshtastic.org/docs/configuration/radio/lora/" target="_blank" rel="noopener">Docs · LoRa</a>
+      </div>
+    </div>
+
+    <div class="fine">
+      <p>
+        <strong>MeshPTY</strong> — comunidad independiente de usuarios en Panamá.
+        Contacto: <a href="mailto:alvaroenoht@gmail.com">alvaroenoht@gmail.com</a>
+      </p>
+      <p>
+        Esta página es un resumen divulgativo y <strong>no constituye asesoría legal ni regulatoria</strong>.
+        Cada usuario es responsable de operar dentro de los límites de potencia y las bandas de
+        frecuencia permitidos por la <strong>ASEP</strong> en la República de Panamá.
+      </p>
+      <p>
+        MeshPTY es un grupo comunitario independiente y sin fines de lucro. <strong>No está
+        afiliado, patrocinado ni respaldado por Meshtastic LLC.</strong> Meshtastic® es una marca
+        registrada de Meshtastic LLC.
+      </p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

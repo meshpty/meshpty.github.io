@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cuando se cae la señal — MeshPTY</title>
+<meta name="description" content="Conciertos, estadios, carnavales, apagones y cortes de servicio. La señal se cae más seguido de lo que crees — y una malla LoRa no depende de ella.">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#14181c">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MeshPTY">
+<meta property="og:title" content="Cuando se cae la señal — MeshPTY">
+<meta property="og:description" content="Conciertos, estadios, carnavales, apagones y cortes de servicio. La señal se cae más seguido de lo que crees — y una malla LoRa no depende de ella.">
+<meta property="og:image" content="https://meshpty.github.io/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<a class="skip" href="#main">Saltar al contenido</a>
+
+<nav>
+  <div class="wrap-wide">
+    <a class="brand" href="index.html"><span class="dot"></span>Mesh<b>PTY</b></a>
+    <div class="links">
+      <a href="index.html">Inicio</a>
+      <a href="comprar.html">Guía de compra</a>
+      <a href="instalar.html">Firmware</a>
+      <a href="nodos-fijos.html">Infraestructura</a>
+      <a href="faq.html">Preguntas</a>
+      <a href="comunidad.html">Comunidad</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+
+<div class="phead">
+  <div class="wrap">
+    <span class="eyebrow">La red</span>
+    <h1>Cuando se cae la señal</h1>
+    <p>
+      Pasa más seguido de lo que crees. Y casi nunca es cuando lo esperas.
+    </p>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <h2 class="mt0">Tres formas distintas de quedarse incomunicado</h2>
+    <p class="sub">
+      No son lo mismo, y conviene distinguirlas. En las tres, una malla LoRa sigue de pie —
+      porque <strong>no depende de ninguna torre celular ni de ningún operador</strong>.
+    </p>
+
+    <div class="grid g3">
+      <div class="card">
+        <h3>Saturación</h3>
+        <p>
+          La red está ahí, pero no pasa nada. Demasiada gente, muy poca capacidad.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Infraestructura caída</h3>
+        <p>
+          Apagones, tormentas, cables cortados. La torre simplemente no está.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Corte deliberado</h3>
+        <p>
+          El servicio se suspende por decisión administrativa. Ha pasado en Panamá.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SATURACIÓN ================= -->
+<section>
+  <div class="wrap">
+    <h2>Saturación: el caso más común, y el más subestimado</h2>
+    <p class="sub">
+      Todo el mundo ha vivido esto. Estás en un lugar con miles de personas, tienes cuatro rayitas de
+      señal, y <strong>no te entra ni sale un mensaje</strong>. La red no está caída — está tapada.
+    </p>
+
+    <p class="muted">
+      Una torre celular tiene capacidad finita. Cuando se le juntan diez mil teléfonos en un radio de
+      doscientos metros, todos intentando subir historias al mismo tiempo, la torre se ahoga.
+      <strong>El resultado práctico es idéntico a no tener señal</strong> — con el agravante de que tu
+      celular te dice que sí tienes.
+    </p>
+
+    <h3>Dónde pasa, aquí</h3>
+    <ul class="plain">
+      <li><strong>Conciertos y festivales.</strong> El momento clásico: se acaba el show y nadie logra coordinar dónde encontrarse.</li>
+      <li><strong>Estadios.</strong> Miles de personas, un solo punto, todas con el teléfono en la mano.</li>
+      <li><strong>Carnavales.</strong> Las Tablas, Chitré, y cualquier pueblo que multiplica su población por veinte durante cuatro días.</li>
+      <li><strong>Fin de año y fiestas patrias.</strong> Todo el país mandando el mismo mensaje al mismo minuto.</li>
+      <li><strong>Desfiles y eventos masivos.</strong> Cualquier concentración grande y concentrada.</li>
+    </ul>
+
+    <div class="box ok">
+      <h3>Aquí la malla brilla — y es el caso más fácil de todos</h3>
+      <p>
+        En un concierto o un estadio, <strong>tu grupo está a pocos cientos de metros unos de otros</strong>.
+        Eso es distancia de sobra para LoRa, incluso a nivel de piso y con multitud de por medio. No
+        necesitas repetidoras, no necesitas cobertura de nadie: los nodos de tu grupo se hablan
+        directamente entre sí.
+      </p>
+      <p class="mb0">
+        Y como LoRa usa <strong>otra banda completamente distinta</strong> a la del celular, la
+        saturación de la red móvil <strong>no le afecta en absoluto</strong>. Tu mensaje pasa mientras
+        todo el mundo alrededor mira su teléfono con cara de frustración.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= INFRAESTRUCTURA ================= -->
+<section>
+  <div class="wrap">
+    <h2>Cuando la infraestructura se cae</h2>
+    <p class="sub">
+      Apagones, tormentas, inundaciones, un cable de fibra cortado por una retroexcavadora. La red
+      celular necesita <strong>torres con energía y con enlace</strong>. Si falta cualquiera de las dos,
+      no hay servicio.
+    </p>
+    <p class="muted">
+      Una malla Meshtastic no tiene ese punto único de falla. Cada nodo es independiente, corre con una
+      batería que dura semanas, y si es solar puede seguir funcionando indefinidamente sin que nadie lo
+      toque. <strong>Los nodos se hablan entre sí, no con una central.</strong> No hay nada que se pueda
+      caer y dejarlos a todos mudos de golpe.
+    </p>
+
+    <div class="box info">
+      <h3>Por eso los nodos solares importan tanto</h3>
+      <p class="mb0">
+        Un nodo en un techo, con panel solar y batería, <strong>sigue vivo durante un apagón</strong>.
+        Ese es exactamente el momento en que la malla justifica su existencia entera.
+        <a href="nodos-fijos.html">Cómo montar uno →</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CORTE DELIBERADO ================= -->
+<section id="bocas">
+  <div class="wrap">
+    <h2>Cuando el servicio se apaga por decisión administrativa</h2>
+    <p class="sub">
+      Esto no es hipotético y no pasó en otro país. Pasó en Panamá, en 2025.
+    </p>
+
+    <div class="box warn">
+      <h3>Bocas del Toro, junio de 2025</h3>
+      <p>
+        En el contexto de las protestas en la provincia — originadas por la reforma de pensiones
+        (Ley 462) y la huelga de los trabajadores bananeros — el presidente
+        <strong>José Raúl Mulino decretó un estado de urgencia</strong> en Bocas del Toro, que
+        suspendió temporalmente ciertas garantías constitucionales, entre ellas la libertad de
+        movimiento y de reunión.
+      </p>
+      <p>
+        Bajo ese decreto, la <strong>ASEP coordinó la suspensión temporal del servicio de telefonía
+        móvil e internet residencial en toda la provincia</strong>. La medida comenzó el 20–21 de junio
+        de 2025 y, tras aclararse que aplicaba a usuarios residenciales (excluyendo salud, comercio y
+        gobierno), <strong>se extendió hasta el 29 de junio</strong>.
+      </p>
+      <p class="mb0">
+        Organizaciones como <strong>IPANDETEC</strong> e <strong>Internet Society Panamá</strong>
+        pidieron públicamente el restablecimiento inmediato del servicio. El gobierno sostuvo que la
+        medida se amparaba en el estado de urgencia constitucional.
+        <strong>Las fuentes están abajo</strong> — léelas tú mismo.
+      </p>
+    </div>
+
+    <div class="box info">
+      <h3>Aquí no estamos tomando partido</h3>
+      <p class="mb0">
+        MeshPTY es una comunidad técnica, no un grupo político, y no vamos a opinar sobre las protestas
+        ni sobre la decisión del gobierno. Lo traemos por una razón puramente técnica y verificable:
+        <strong>una provincia entera de Panamá se quedó sin telefonía móvil ni internet durante más de
+        una semana</strong>. Eso ocurrió. Y una malla LoRa, por construcción, no depende de ninguno de
+        los dos servicios que se suspendieron.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LA PARTE HONESTA ================= -->
+<section>
+  <div class="wrap">
+    <h2>La parte honesta: esto no se improvisa</h2>
+
+    <div class="box stop">
+      <h3>Una malla no aparece cuando la necesitas. Ya tiene que estar ahí.</h3>
+      <p>
+        Si en Bocas del Toro no había nodos antes del corte, <strong>Meshtastic no le habría servido de
+        nada a nadie</strong>. No es una app que descargas cuando se cae la señal. Es una
+        <strong>red física</strong>: requiere que un montón de gente haya comprado su equipo, lo haya
+        encendido, y lo haya dejado corriendo — <em>antes</em>, cuando todo estaba normal y nadie
+        pensaba que hacía falta.
+      </p>
+      <p class="mb0">
+        <strong>Ese es el único argumento real de esta página.</strong> No "compra un nodo por si acaso".
+        Sino: la utilidad de la malla el día que la necesites es <strong>exactamente proporcional a
+        cuánta gente la construyó cuando no la necesitaba</strong>.
+      </p>
+    </div>
+
+    <p class="muted">
+      Y seamos claros con lo que Meshtastic <strong>no</strong> es: no reemplaza al celular, no da
+      internet, no hace llamadas, no manda fotos. Manda mensajes de texto cortos entre gente que tiene
+      nodos. Eso es todo. <strong>En un día normal es un juguete fascinante. En un mal día, puede ser lo
+      único que funcione.</strong>
+    </p>
+
+    <div class="box ok">
+      <h3>Qué puedes hacer hoy</h3>
+      <ul class="check mb0">
+        <li><strong>Consigue tu nodo</strong> y enciéndelo. Estar en la malla ya es aportar. <a href="comprar.html">Guía de compra →</a></li>
+        <li><strong>Pon uno fijo en tu casa</strong>, lo más alto que puedas. Es lo que le da alcance real a todo el vecindario. <a href="nodos-fijos.html">Cómo →</a></li>
+        <li><strong>Arma un canal privado</strong> con tu familia o tu grupo. Es lo que vas a usar en un concierto, en el campo, o en un mal día. <a href="faq.html">Cómo →</a></li>
+        <li><strong>Trae a alguien contigo.</strong> Una malla de una persona no es una malla.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FUENTES ================= -->
+<section>
+  <div class="wrap">
+    <h2>Fuentes</h2>
+    <p class="sub">
+      Sobre el corte de servicios en Bocas del Toro, junio de 2025. No nos creas a nosotros — lee las
+      fuentes.
+    </p>
+
+    <ul class="plain">
+      <li>
+        <strong>France 24</strong> —
+        <a href="https://www.france24.com/es/am%C3%A9rica-latina/20250622-panam%C3%A1-impone-estado-de-urgencia-y-corta-internet-en-bocas-del-toro-en-medio-de-ola-de-protestas" target="_blank" rel="noopener">
+          Panamá impone "estado de urgencia" y corta internet en Bocas del Toro en medio de ola de protestas
+        </a> (22 de junio de 2025)
+      </li>
+      <li>
+        <strong>DPL News</strong> —
+        <a href="https://dplnews.com/panama-corte-de-internet-y-telefonia-en-bocas-del-toro-estado-de-urgencia/" target="_blank" rel="noopener">
+          Panamá justifica corte de Internet y telefonía en Bocas del Toro bajo estado de urgencia constitucional
+        </a>
+      </li>
+      <li>
+        <strong>Internet Society Pulse</strong> —
+        <a href="https://pulse.internetsociety.org/en/shutdowns/telecom-shutdown-in-bocas-del-toro/" target="_blank" rel="noopener">
+          Telecom shutdown in Bocas del Toro
+        </a> — documentación técnica del corte y su duración
+      </li>
+      <li>
+        <strong>IPANDETEC</strong> —
+        <a href="https://www.ipandetec.org/panama/panama-debe-restablecer-internet-bocas/" target="_blank" rel="noopener">
+          Panamá debe restablecer el acceso a Internet y telefonía móvil en Bocas del Toro de forma inmediata
+        </a>
+      </li>
+      <li>
+        <strong>Internet Society Panamá</strong> —
+        <a href="https://www.isoc.org.pa/comunicado-bocas-2025/" target="_blank" rel="noopener">
+          En defensa de una Internet abierta y accesible para todos
+        </a>
+      </li>
+      <li>
+        <strong>Data Center Dynamics</strong> —
+        <a href="https://www.datacenterdynamics.com/en/news/panama-repeatedly-cuts-internet-in-bocas-del-toro-over-banana-protests/" target="_blank" rel="noopener">
+          Panama repeatedly cuts Internet in Bocas del Toro over banana protests
+        </a>
+      </li>
+    </ul>
+
+    <div class="box info">
+      <h3>Nota legal</h3>
+      <p class="mb0">
+        Usar Meshtastic en Panamá <strong>es legal</strong>: opera en la banda de uso libre de 900 MHz,
+        sin licencia y sin cánones (<a href="legal.html">ver la regulación →</a>). Como en cualquier
+        otro caso, cada usuario es responsable de cumplir con la ley vigente y con las disposiciones de
+        la ASEP.
+      </p>
+    </div>
+
+    <hr class="rule">
+
+    <div class="cta">
+      <a class="btn primary" href="comprar.html">Consigue tu nodo →</a>
+      <a class="btn" href="comunidad.html">Únete a la comunidad</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div class="col">
+        <h4>Empezar</h4>
+        <a href="comprar.html">Guía de compra</a>
+        <a href="instalar.html">Firmware y configuración</a>
+        <a href="faq.html">Preguntas frecuentes</a>
+      </div>
+      <div class="col">
+        <h4>La red</h4>
+        <a href="nodos-fijos.html">Infraestructura</a>
+        <a href="mapa.html">Mapa y cobertura</a>
+        <a href="sin-senal.html">Cuando se cae la señal</a>
+        <a href="legal.html">Regulación (ASEP)</a>
+        <a href="comunidad.html">Comunidad</a>
+      </div>
+      <div class="col">
+        <h4>Oficial</h4>
+        <a href="https://meshtastic.org" target="_blank" rel="noopener">meshtastic.org</a>
+        <a href="https://pulse.internetsociety.org/en/shutdowns/telecom-shutdown-in-bocas-del-toro/" target="_blank" rel="noopener">ISOC Pulse · Bocas del Toro</a>
+      </div>
+    </div>
+
+    <div class="fine">
+      <p>
+        <strong>MeshPTY</strong> — comunidad independiente de usuarios en Panamá.
+        Contacto: <a href="mailto:alvaroenoht@gmail.com">alvaroenoht@gmail.com</a>
+      </p>
+      <p>
+        MeshPTY es una comunidad técnica sin afiliación política. Los hechos citados en esta página
+        provienen de las fuentes enlazadas arriba.
+      </p>
+      <p>
+        MeshPTY es un grupo comunitario independiente y sin fines de lucro. <strong>No está afiliado,
+        patrocinado ni respaldado por Meshtastic LLC.</strong> Meshtastic® es una marca registrada de
+        Meshtastic LLC. Cada usuario es responsable de operar dentro de los límites permitidos por la
+        <strong>ASEP</strong>.
+      </p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

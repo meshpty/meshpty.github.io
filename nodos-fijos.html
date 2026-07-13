@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Infraestructura — MeshPTY</title>
+<meta name="description" content="Cómo montar un nodo fijo solar en Panamá: comprar listo o armarlo, nRF52840 vs ESP32, baterías, cajas, conectores JST, pigtails y paneles. Más rol CLIENT_BASE y posición fija.">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#14181c">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MeshPTY">
+<meta property="og:title" content="Infraestructura — MeshPTY">
+<meta property="og:description" content="Cómo montar un nodo fijo solar en Panamá: comprar listo o armarlo, nRF52840 vs ESP32, baterías, cajas, conectores JST, pigtails y paneles. Más rol CLIENT_BASE y posición fija.">
+<meta property="og:image" content="https://meshpty.github.io/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<a class="skip" href="#main">Saltar al contenido</a>
+
+<nav>
+  <div class="wrap-wide">
+    <a class="brand" href="index.html"><span class="dot"></span>Mesh<b>PTY</b></a>
+    <div class="links">
+      <a href="index.html">Inicio</a>
+      <a href="comprar.html">Guía de compra</a>
+      <a href="instalar.html">Firmware</a>
+      <a href="nodos-fijos.html" aria-current="page">Infraestructura</a>
+      <a href="faq.html">Preguntas</a>
+      <a href="comunidad.html">Comunidad</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+
+<div class="phead">
+  <div class="wrap">
+    <span class="eyebrow">Guía · paso 3 de 3</span>
+    <h1>Infraestructura</h1>
+    <p>
+      Nodos fijos: lo que convierte un montón de radios sueltas en una red. Aquí está todo — qué hardware
+      aguanta el clima de Panamá, cómo configurarlo, y cómo aparecer en el mapa sin publicar tu dirección.
+    </p>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <h2 class="mt0">Por qué esto importa más que nada</h2>
+    <p class="sub">
+      Una malla se muere de una forma muy específica: alguien compra su nodo con ilusión, lo enciende,
+      no ve a nadie, y lo guarda en una gaveta para siempre.
+    </p>
+    <p class="muted">
+      Entre edificios, el alcance real son pocas calles. Con línea de vista limpia hemos llegado a
+      <strong>9 km</strong>. Mismo equipo, misma potencia — lo único distinto era la altura.
+      <strong>Eso es todo lo que un nodo fijo resuelve, y es todo lo que hace falta.</strong>
+    </p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Dónde hacen falta, en Panamá</h2>
+
+    <div class="grid g2">
+      <div class="card">
+        <h3>La zona de edificios — prioridad #1</h3>
+        <p>
+          <strong>Costa del Este, Punta Pacífica, Avenida Balboa, Obarrio, área bancaria.</strong>
+          Es donde más gente hay y donde menos alcance tenemos. Un balcón en un piso 30 con vista al mar
+          es, en la práctica, una torre de radio — y ya la estás pagando.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Cerros</h3>
+        <p>
+          <strong>Cerro Ancón</strong> domina la ciudad y la entrada del Canal.
+          <strong>Cerro Azul</strong> cubre el este. <strong>Cerro Campana</strong> abre hacia el oeste.
+          Uno solo de ellos cambiaría la malla entera.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Costa y mar</h3>
+        <p>
+          LoRa sobre agua rinde muchísimo. Un nodo mirando a la bahía cubre una superficie enorme sin
+          obstáculos.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Torres existentes</h3>
+        <p>
+          Si eres radioaficionado y ya tienes torre, ya tienes lo más caro y lo más difícil.
+          <a href="comunidad.html#radioaficionados">Hablemos.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HARDWARE ================= -->
+<section id="hardware">
+  <div class="wrap">
+    <h2>El hardware: ¿comprarlo listo o armarlo?</h2>
+    <p class="sub">
+      Las dos opciones son válidas. La pregunta real es cuánto tiempo quieres invertir y cuánta
+      tolerancia tienes a que algo falle en un techo bajo la lluvia.
+    </p>
+
+    <div class="grid g2">
+      <div class="card">
+        <h3>Comprarlo listo</h3>
+        <p>
+          En Panamá ya hay varios <strong>nodos solares SenseCAP de Seeed</strong> funcionando. Vienen
+          armados: caja, panel, batería y radio, todo integrado y probado.
+        </p>
+        <p>
+          <strong>A favor:</strong> funciona el día uno. Sin sorpresas, sin soldar, sin cables raros.
+          <br>
+          <strong>En contra:</strong> más caro, y menos flexible si después quieres cambiar algo.
+        </p>
+        <p class="mb0">
+          <strong>Si tu prioridad es que el nodo esté arriba y funcionando ya, esta es tu opción.</strong>
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Armarlo tú</h3>
+        <p>
+          Más barato, más flexible, y honestamente más divertido. Pero tienes que acertar en varias cosas
+          que no son obvias — y en el trópico los errores se pagan caro.
+        </p>
+        <p class="mb0">
+          Todo lo que sigue en esta sección es para ti. <strong>Léelo completo antes de comprar nada</strong>,
+          porque hay al menos tres cosas aquí que no se consiguen en Panamá y tienes que pedirlas junto con
+          el nodo.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Si lo armas: primero elige el procesador</h2>
+    <p class="sub">
+      Esta es <strong>la decisión que define todo lo demás</strong> — el tamaño de la batería, el del panel,
+      y si tu nodo sobrevive una semana nublada o no.
+    </p>
+
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">nRF52840</th>
+            <th scope="col">ESP32</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Consumo</strong></td>
+            <td><strong>Muy bajo.</strong> Es su gran virtud.</td>
+            <td>Bastante más alto.</td>
+          </tr>
+          <tr>
+            <td><strong>Batería y panel</strong></td>
+            <td>Le basta con una <strong>batería pequeña y un panel pequeño</strong>.</td>
+            <td>Necesita <strong>batería grande y panel generoso</strong>.</td>
+          </tr>
+          <tr>
+            <td><strong>Ahorro de energía</strong></td>
+            <td>Nativo, no hace falta hacer nada.</td>
+            <td>Tiene <strong>modo de ahorro</strong> — actívalo, sin eso no sobrevive.</td>
+          </tr>
+          <tr>
+            <td><strong>Ejemplos</strong></td>
+            <td><strong>RAK WisBlock</strong>, <strong>Heltec</strong> en versión nRF.</td>
+            <td><strong>Heltec V3</strong>, <strong>LilyGO T-Beam / T-Supreme</strong>.</td>
+          </tr>
+          <tr>
+            <td><strong>Veredicto</strong></td>
+            <td><strong>La mejor opción para un nodo solar.</strong> Si vas a dejarlo en un techo, ve por aquí.</td>
+            <td>Funciona con solar en Panamá — el sol nos sobra — pero dimensiona bien.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box info">
+      <h3>El ESP32 sí sirve para solar, con cuidado</h3>
+      <p class="mb0">
+        No lo descartes: en Panamá el sol es abundante y un ESP32 con modo de ahorro activado y una batería
+        decente aguanta bien. Pero <strong>hay días de lluvia y semanas encapotadas</strong>, y ahí es donde
+        se cae si le quedaste corto. Dimensiona para el peor mes, no para el promedio.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Batería: el calor manda</h2>
+
+    <div class="box warn">
+      <h3>Usa celdas cilíndricas: 18650 o 21700</h3>
+      <p>
+        <strong>Mínimo 3000 mAh</strong> si vas con ESP32. Y por el calor que hace aquí, la recomendación es
+        <strong>evitar las baterías tipo pouch</strong> (las LiPo planas y blanditas) en un nodo que va a
+        vivir metido en una caja cerrada, al sol, todo el año.
+      </p>
+      <p class="mb0">
+        <strong>Seamos precisos:</strong> no tenemos ningún caso reportado en Panamá de una batería que haya
+        fallado así. Esto es una <strong>recomendación preventiva</strong>, no una alarma. Pero las celdas
+        18650 y 21700 tienen carcasa rígida y toleran mucho mejor el calor sostenido, y en un aparato que vas
+        a dejar solo en un techo durante meses, esa diferencia vale la pena.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Panel solar: 5 V, no 6 V</h2>
+
+    <div class="box stop">
+      <h3>Este error recalienta el nodo</h3>
+      <p>
+        Los nodos con entrada solar integrada <strong>no están hechos para paneles de 6 V</strong>. Con 6 V,
+        el exceso de voltaje se disipa en forma de <strong>calor</strong> — y en un nodo cerrado, al sol, en
+        el clima de Panamá, eso es justo lo último que quieres agregarle.
+      </p>
+      <p class="mb0">
+        <strong>Usa paneles de 5 V.</strong> Si por lo que sea vas a usar uno de 6 V, necesitas un
+        <strong>controlador MPPT</strong> en el medio. No lo conectes directo.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Lo que NO se consigue en Panamá</h2>
+    <p class="sub">
+      Esta es la parte que arruina proyectos. <strong>Léela antes de comprar</strong>, porque son cosas que
+      tienes que pedir <em>junto con</em> el nodo o te vas a quedar varado.
+    </p>
+
+    <h3>Conectores JST PH y JST GH</h3>
+    <p class="muted">
+      Son los conectores que usan estos nodos para la <strong>batería y la entrada solar</strong>. Algunos
+      nodos ya vienen con los cables incluidos; otros no.
+    </p>
+    <div class="box warn">
+      <h3>En Panamá no se consiguen. En ningún lado.</h3>
+      <p class="mb0">
+        <strong>Pídelos junto con el nodo.</strong> Y pide de sobra — son baratos, diminutos, y el día que te
+        falte uno vas a tener el proyecto detenido semanas esperando un envío. Verifica bien si tu placa usa
+        <strong>PH</strong> (paso 2.0 mm) o <strong>GH</strong> (paso 1.25 mm): no son intercambiables.
+      </p>
+    </div>
+
+    <h3>Cajas herméticas</h3>
+    <p class="muted">
+      Esto sí se consigue aquí: <strong>Electrónica Caribe</strong> tiene buena selección de cajas estancas.
+      Busca <strong>IP65 como mínimo</strong> — nuestra lluvia entra por donde sea, y entra de lado. Y usa
+      <strong>prensaestopas</strong> para pasar los cables: por donde entra el cable es por donde entra el
+      agua.
+    </p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Pigtails y conectores de antena</h2>
+    <p class="sub">
+      Suena a detalle menor. No lo es. <strong>Aquí es donde más problemas hemos tenido.</strong>
+    </p>
+
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead>
+          <tr><th scope="col">Cable</th><th scope="col">Cómo es</th><th scope="col">Cuándo usarlo</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>RG178</strong></td>
+            <td>Más delgado y flexible. <strong>Más pérdida de señal.</strong></td>
+            <td>Solo para tramos muy cortos, donde el espacio manda.</td>
+          </tr>
+          <tr>
+            <td><strong>RG316</strong></td>
+            <td>Más grueso, más robusto. <strong>Bastante menos pérdida.</strong></td>
+            <td>
+              <strong>Es el que quieres</strong> en casi todos los casos, y sobre todo en un nodo fijo donde
+              el cable va a quedar ahí durante años.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box stop">
+      <h3>Cuidado extremo con los conectores IPEX / u.FL</h3>
+      <p>
+        Son esos conectorcitos diminutos que van soldados a la placa. Son <strong>frágiles</strong>: están
+        pensados para conectarse <em>pocas veces</em>, y si los jalas mal puedes
+        <strong>arrancar la pista de la placa</strong> — y ahí ya no hay reparación fácil.
+      </p>
+      <ul class="check mb0">
+        <li><strong>Conéctalo una vez y déjalo quieto.</strong> Cada desconexión lo desgasta.</li>
+        <li><strong>Nunca jales del cable.</strong> Se desconecta tirando recto del conector, no del cable.</li>
+        <li><strong>Asegura el cable</strong> a la placa o a la caja para que no quede colgando y haciendo palanca.</li>
+      </ul>
+    </div>
+
+    <div class="box warn">
+      <h3>Un aviso desde la experiencia</h3>
+      <p class="mb0">
+        <strong>Hemos tenido problemas reales por cables malos.</strong> Un pigtail barato o mal terminado te
+        arruina el alcance sin que te des cuenta — el nodo "funciona", pero llega a la mitad de lo que debería,
+        y te vuelves loco buscando la falla en otro lado. <strong>No ahorres en el pigtail.</strong> Es la
+        pieza más barata del nodo y la que más daño hace cuando falla.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ROLES ================= -->
+<section id="roles">
+  <div class="wrap">
+    <h2>Configuración · Paso 1: ponlo en <code>CLIENT_BASE</code></h2>
+    <p class="sub">
+      Este es el rol correcto para un nodo fijo en altura. No es <code>ROUTER</code>, y la diferencia importa
+      mucho.
+    </p>
+
+    <div class="box ok">
+      <h3>Qué hace <code>CLIENT_BASE</code></h3>
+      <p>Es el rol de <strong>estación base personal</strong>:</p>
+      <ul class="check">
+        <li><strong>Siempre retransmite</strong> los paquetes que vienen de — o van hacia — sus <strong>nodos favoritos</strong>.</li>
+        <li><strong>Con todo lo demás se comporta como un <code>CLIENT</code> normal</strong>: reenvía cuando hace falta, sin acaparar.</li>
+        <li><strong>Es visible en la lista de nodos</strong>, así que la comunidad puede identificarlo.</li>
+        <li><strong>Mantiene Bluetooth activo</strong> — puedes seguir administrándolo desde el celular.</li>
+      </ul>
+      <p class="mb0">
+        En corto: <strong>le da prioridad a tu gente sin hacerle daño al resto de la malla.</strong>
+      </p>
+    </div>
+
+    <div class="box info">
+      <h3>El truco está en los favoritos — sin ellos el rol no sirve de mucho</h3>
+      <p>
+        Un <code>CLIENT_BASE</code> <strong>solo prioriza a los nodos que marques como favoritos</strong>. Si
+        no marcas ninguno, se comporta prácticamente como un <code>CLIENT</code> cualquiera.
+      </p>
+      <p class="mb0">
+        Así que <strong>marca como favoritos a los nodos cercanos</strong>: los tuyos, los de tus vecinos, los
+        de la gente de tu zona que está encerrada en un primer piso y no llega a ningún lado. Para esos nodos,
+        tu estación base <strong>se comporta como un router</strong> y siempre les retransmite.
+        <strong>Ese es todo el punto.</strong>
+      </p>
+    </div>
+
+    <div class="box stop">
+      <h3>Por qué NO <code>ROUTER</code></h3>
+      <p>
+        <code>ROUTER</code> tiene prioridad de reenvío <strong>para todo el tráfico de la malla</strong>, no
+        solo para tus favoritos. Suena a que ayuda más — por eso tanta gente lo pone "por si acaso".
+      </p>
+      <p class="mb0">
+        El problema: un <code>ROUTER</code> mal ubicado <strong>acapara reenvíos</strong> que le habrían tocado
+        a nodos mejor posicionados, y la malla entera empeora. Además apaga Bluetooth por defecto, así que
+        administrarlo se vuelve un dolor de cabeza.
+      </p>
+    </div>
+
+    <h3>Cómo cambiarlo</h3>
+
+    <ol class="steps">
+      <li>
+        <h3>Abre la configuración y entra a <em>Device configuration</em></h3>
+        <p>
+          Toca el <strong>engranaje</strong> abajo. Verás las secciones <em>Radio configuration</em>,
+          <em>Device configuration</em> y <em>Module configuration</em>.
+        </p>
+        <div class="shots">
+          <figure class="shot">
+            <img src="img/config-menu.png" alt="Menú de configuración de la app Meshtastic, con Device configuration resaltado">
+            <figcaption><strong>1.</strong> Engranaje → <em>Device configuration</em>.</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="img/device-config.png" alt="Submenú Device configuration mostrando Device, Position, Power, Network, Display y Bluetooth">
+            <figcaption><strong>2.</strong> Toca <em>Device</em>, el primero de la lista.</figcaption>
+          </figure>
+        </div>
+      </li>
+
+      <li>
+        <h3>Abre <em>Device Role</em> y elige <code>CLIENT_BASE</code></h3>
+        <p>
+          Está en la lista desplegable. Vas a ver varios roles — ignora <code>REPEATER</code>,
+          <code>TRACKER</code>, <code>SENSOR</code> y los de TAK.
+          <strong>El tuyo es <code>CLIENT_BASE</code></strong>, al final de la lista. El nodo se reinicia solo
+          al guardar.
+        </p>
+        <figure class="shot">
+          <img src="img/device-role.png" alt="Lista desplegable de Device Role mostrando REPEATER, TRACKER, SENSOR, TAK, CLIENT_HIDDEN, LOST_AND_FOUND, TAK_TRACKER, ROUTER_LATE y CLIENT_BASE">
+          <figcaption><strong>3.</strong> <em>Device Role</em> → <code>CLIENT_BASE</code> (abajo del todo).</figcaption>
+        </figure>
+      </li>
+
+      <li>
+        <h3>Marca tus nodos cercanos como favoritos</h3>
+        <p>
+          En la <strong>lista de nodos</strong>, mantén presionado un nodo y márcalo como favorito. Hazlo con
+          los nodos de tu zona a los que quieras que tu estación base les dé prioridad.
+          <strong>Sin esto, el rol no hace gran cosa.</strong>
+        </p>
+      </li>
+    </ol>
+
+    <div class="box warn">
+      <h3>Nota: <code>REPEATER</code> quedó deprecado</h3>
+      <p class="mb0">
+        Si leíste guías viejas que recomendaban el rol <code>REPEATER</code>: quedó
+        <strong>deprecado a partir del firmware 2.7.11</strong>. No lo uses.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= GPS FIJO ================= -->
+<section id="posicion-fija">
+  <div class="wrap">
+    <h2>Paso 2 · Actívale la posición GPS fija</h2>
+    <p class="sub">
+      Si tu nodo no se va a mover, decírselo <strong>ahorra muchísima batería</strong> (puedes apagar el GPS
+      del todo) y <strong>hace que aparezca en el mapa</strong> aunque ni siquiera tenga chip de GPS.
+    </p>
+
+    <h3>Primero, consigue tus coordenadas</h3>
+    <div class="grid g3">
+      <div class="card soft">
+        <h3>1. Desde el celular</h3>
+        <p>
+          La app trae un botón <strong><em>“Set from current phone location”</em></strong> que rellena todo
+          solo. Lo más rápido — <strong>siempre que estés parado junto al nodo.</strong>
+        </p>
+      </div>
+      <div class="card soft">
+        <h3>2. Google Maps</h3>
+        <p>
+          Mantén presionado el punto exacto y copia latitud y longitud. Útil si quieres poner un punto que
+          <em>no</em> es exactamente donde estás.
+        </p>
+      </div>
+      <div class="card soft">
+        <h3>3. App <em>GPS Test</em></h3>
+        <p>
+          Te da coordenadas y <strong>altitud</strong> con buena precisión. La mejor opción si te importa que
+          la altura quede bien.
+        </p>
+      </div>
+    </div>
+
+    <h3>Ahora configúralo</h3>
+    <ol class="steps">
+      <li>
+        <h3>Engranaje → <em>Device configuration</em> → <em>Position</em></h3>
+        <p>Es el segundo de la lista, con el ícono del pin de mapa.</p>
+        <figure class="shot">
+          <img src="img/position-menu.png" alt="Submenú Device configuration con la opción Position resaltada">
+          <figcaption>Entra a <em>Position</em>.</figcaption>
+        </figure>
+      </li>
+
+      <li>
+        <h3>Activa <em>Fixed Position</em> y llena los campos</h3>
+        <p>
+          En la sección <strong>Device GPS</strong>, enciende el interruptor de
+          <strong><em>Fixed Position</em></strong>. Se habilitan <em>Latitude</em>, <em>Longitude</em> y
+          <em>Altitude</em>. Escríbelas a mano, o toca
+          <strong><em>“Set from current phone location”</em></strong> para que las tome del celular.
+        </p>
+        <p>
+          <strong>No dejes la altitud en 0.</strong> Es el dato que le dice a la comunidad si tu nodo está en
+          un piso 30 o a nivel de calle — y es justo lo que hace útil un mapa de cobertura. Ponla en metros.
+        </p>
+        <figure class="shot">
+          <img src="img/gps-fijo.png" alt="Pantalla Device GPS con el interruptor Fixed Position activado y los campos Latitude, Longitude y Altitude">
+          <figcaption>
+            <strong>Fixed Position</strong> encendido, y abajo el botón
+            <em>Set from current phone location</em>.
+          </figcaption>
+        </figure>
+      </li>
+
+      <li>
+        <h3>Apaga el GPS del nodo</h3>
+        <p>
+          Si el nodo tiene GPS integrado y ya no se va a mover, apágalo. Es de lo que más consume, y en un nodo
+          solar puede ser la diferencia entre sobrevivir la temporada de lluvias o no.
+        </p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ================= PRIVACIDAD ================= -->
+<section id="privacidad">
+  <div class="wrap">
+    <h2>Paso 3 · Decide cuánta ubicación quieres publicar</h2>
+    <p class="sub">
+      Aquí decides, a propósito, qué tanto se sabe de dónde está tu nodo. Y sí:
+      <strong>puedes aparecer en el mapa sin publicar tu dirección exacta.</strong>
+    </p>
+
+    <div class="box warn">
+      <h3>Ten claro lo que estás transmitiendo</h3>
+      <p class="mb0">
+        El canal <code>LongFast</code> es <strong>público de verdad</strong> — su clave la conoce cualquiera.
+        Si tu nodo anuncia posición precisa ahí, <strong>cualquier persona con un nodo encendido puede ver
+        dónde está</strong>. Para un nodo en un techo eso suele dar igual. Para el nodo de tu casa, quizá no.
+        <strong>Decídelo a propósito, no por descuido.</strong>
+      </p>
+    </div>
+
+    <ol class="steps">
+      <li>
+        <h3>Engranaje → <em>Channels</em></h3>
+        <p>Está arriba, en la sección <strong>Radio configuration</strong>.</p>
+        <figure class="shot">
+          <img src="img/channels-menu.png" alt="Menú de configuración con la opción Channels resaltada bajo Radio configuration">
+          <figcaption>Entra a <em>Channels</em> y abre el canal <code>LongFast</code>.</figcaption>
+        </figure>
+      </li>
+
+      <li>
+        <h3>Enciende <em>Position enabled</em></h3>
+        <p>
+          Esto es lo que hace que tu nodo <strong>comparta su ubicación en ese canal</strong>. Si lo dejas
+          apagado, tu nodo sigue funcionando y reenviando igual — simplemente no aparece en el mapa. Es una
+          opción perfectamente válida.
+        </p>
+      </li>
+
+      <li>
+        <h3>Aquí está la clave: <em>Precise location</em></h3>
+        <p><strong>Déjalo APAGADO si quieres ofuscar tu ubicación.</strong></p>
+        <p>
+          Al apagarlo se habilita un <strong>deslizador de precisión</strong>. Muévelo y vas a ver el margen de
+          error que estás publicando — por ejemplo <strong>± 597 ft</strong>. Mientras más a la izquierda, más
+          difusa queda tu posición. Luego toca <strong><em>Save</em></strong>.
+        </p>
+        <figure class="shot">
+          <img src="img/canal-longfast.png" alt="Diálogo de edición del canal LongFast con Position enabled activado, Precise location desactivado y el deslizador de precisión mostrando más menos 597 pies">
+          <figcaption>
+            <em>Position enabled</em> encendido, <em>Precise location</em> <strong>apagado</strong>, y el
+            deslizador definiendo el margen.
+          </figcaption>
+        </figure>
+      </li>
+    </ol>
+
+    <div class="box ok">
+      <h3>La receta que recomendamos</h3>
+      <ul class="check mb0">
+        <li><strong>Nodo en techo, cerro o torre:</strong> posición encendida, precisión alta. Ayuda a todos a entender la cobertura real y no revela nada sensible.</li>
+        <li><strong>Nodo en tu casa o apartamento:</strong> posición encendida pero <strong><em>Precise location</em> apagado</strong>, con el deslizador en un margen que te deje tranquilo. Apareces como una mancha, no como una puerta.</li>
+        <li><strong>¿No quieres publicar nada?</strong> Apaga <em>Position enabled</em>. Tu nodo sigue ayudando igual. <a href="mapa.html">Cuéntanos en privado la zona</a> y lo ponemos como área.</li>
+      </ul>
+    </div>
+
+    <div class="box info">
+      <h3>Nuestro compromiso</h3>
+      <p class="mb0">
+        Si nos escribes en privado para registrar un nodo, <strong>no publicamos coordenadas exactas sin tu
+        permiso explícito.</strong> Preferimos mil veces tener tu nodo en el mapa como una mancha difusa que no
+        tenerlo en absoluto.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ANTENA / LEGAL ================= -->
+<section>
+  <div class="wrap">
+    <h2>Antenas de alta ganancia: baja la potencia</h2>
+    <div class="box warn">
+      <h3>Aplica sobre todo a quien monta en torre</h3>
+      <p>
+        El PNAF de la ASEP permite hasta <strong>6 dBi de ganancia de antena</strong> y un máximo de
+        <strong>36 dBm de PIRE</strong>. Las antenas de <strong>8, 10 o 12 dBi</strong> superan ese límite de
+        ganancia, y hay que compensar reduciendo la potencia del transmisor.
+      </p>
+      <p class="mb0">
+        La cuenta: <strong>PIRE = potencia TX + ganancia de antena − pérdidas de cable</strong>, todo en dB.
+        Ajusta la potencia TX en <strong>Device configuration → LoRa</strong> hasta quedar dentro.
+        <a href="legal.html">Ver la regulación completa →</a>
+      </p>
+    </div>
+
+    <hr class="rule">
+
+    <div class="box info">
+      <h3>¿Vas a montar uno?</h3>
+      <p class="mb0">
+        Escríbenos <strong>antes</strong> de instalarlo. Te ayudamos a ver si tu punto realmente aporta
+        cobertura donde falta, y a no repetir errores que ya cometimos — que son varios, y están casi todos en
+        esta página. <a href="comunidad.html">Estamos aquí →</a>
+      </p>
+    </div>
+
+    <div class="cta">
+      <a class="btn primary" href="mapa.html">Registra tu nodo en el mapa →</a>
+      <a class="btn" href="comunidad.html">Escríbenos</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div class="col">
+        <h4>Empezar</h4>
+        <a href="comprar.html">Guía de compra</a>
+        <a href="instalar.html">Firmware y configuración</a>
+        <a href="faq.html">Preguntas frecuentes</a>
+      </div>
+      <div class="col">
+        <h4>La red</h4>
+        <a href="nodos-fijos.html">Infraestructura</a>
+        <a href="mapa.html">Mapa y cobertura</a>
+        <a href="sin-senal.html">Cuando se cae la señal</a>
+        <a href="legal.html">Regulación (ASEP)</a>
+        <a href="comunidad.html">Comunidad</a>
+      </div>
+      <div class="col">
+        <h4>Oficial</h4>
+        <a href="https://meshtastic.org/docs/configuration/radio/device/" target="_blank" rel="noopener">Docs · Roles</a>
+        <a href="https://meshtastic.org/blog/choosing-the-right-device-role/" target="_blank" rel="noopener">Blog · Elegir el rol</a>
+        <a href="https://meshtastic.org/docs/configuration/radio/channels/" target="_blank" rel="noopener">Docs · Canales</a>
+      </div>
+    </div>
+
+    <div class="fine">
+      <p>
+        <strong>MeshPTY</strong> — comunidad independiente de usuarios en Panamá.
+        Contacto: <a href="mailto:alvaroenoht@gmail.com">alvaroenoht@gmail.com</a>
+      </p>
+      <p>
+        No vendemos hardware ni recibimos comisión por ninguna de las recomendaciones de esta página. Son la
+        experiencia de la comunidad, nada más.
+      </p>
+      <p>
+        MeshPTY es un grupo comunitario independiente y sin fines de lucro. <strong>No está afiliado,
+        patrocinado ni respaldado por Meshtastic LLC.</strong> Meshtastic® es una marca registrada de
+        Meshtastic LLC. Cada usuario es responsable de operar dentro de los límites de potencia y frecuencia
+        permitidos por la <strong>ASEP</strong>.
+      </p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
