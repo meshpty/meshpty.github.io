@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>El puente MQTT de Meshtastic — MeshPTY</title>
+<meta name="description" content="Cómo conectar una malla Meshtastic a MQTT sin inundar a tus vecinos, el ajuste que silenciosamente frena tus paquetes, y las dos cosas que el firmware 2.8 rompió sin avisar.">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#14181c">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="MeshPTY">
+<meta property="og:title" content="El puente MQTT de Meshtastic — MeshPTY">
+<meta property="og:description" content="Cómo conectar una malla Meshtastic a MQTT sin inundar a tus vecinos, el ajuste que silenciosamente frena tus paquetes, y las dos cosas que el firmware 2.8 rompió sin avisar.">
+<meta property="og:image" content="https://meshpty.github.io/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<a class="skip" href="#main">Saltar al contenido</a>
+
+<nav>
+  <div class="wrap-wide">
+    <a class="brand" href="index.html"><span class="dot"></span>Mesh<b>PTY</b></a>
+    <div class="links">
+      <a href="index.html">Inicio</a>
+      <a href="comprar.html">Guía de compra</a>
+      <a href="instalar.html">Firmware</a>
+      <a href="nodos-fijos.html">Infraestructura</a>
+      <a href="carta-azotea.html">Permiso azotea</a>
+      <a href="mqtt.html" aria-current="page">MQTT</a>
+      <a href="faq.html">Preguntas</a>
+      <a href="comunidad.html">Comunidad</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+
+<div class="phead">
+  <div class="wrap">
+    <span class="eyebrow">Guía técnica · MQTT · firmware 2.7 y 2.8</span>
+    <h1>El puente MQTT de Meshtastic</h1>
+    <p>
+      Cómo conectar una malla a MQTT sin inundar a tus vecinos, el ajuste que silenciosamente
+      frena tus paquetes, y las dos cosas que el firmware 2.8 rompió sin avisar.
+    </p>
+    <p class="muted" style="font-family:var(--font-mono);font-size:.78rem;margin-top:16px;letter-spacing:.02em">
+      Cada afirmación de abajo se verificó contra una malla real y el código fuente del firmware.
+    </p>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+
+    <div class="toc">
+      <p>Contenido</p>
+      <ol>
+        <li><a href="#s1">Qué es MQTT en realidad</a></li>
+        <li><a href="#s2">Proxy de cliente vs. gateway</a></li>
+        <li><a href="#s3">Uplink, downlink y por qué vienen apagados</a></li>
+        <li><a href="#s4">«OK to MQTT» — el asesino silencioso de paquetes</a></li>
+        <li><a href="#s5">Tópicos protobuf y JSON</a></li>
+        <li><a href="#s6">El firmware 2.8 rompe los DM a través de un gateway</a></li>
+        <li><a href="#s7">El firmware 2.8 casi duplica tu tiempo en el aire</a></li>
+        <li><a href="#s8">Qué se rompe de verdad entre versiones</a></li>
+        <li><a href="#s9">Lista de verificación</a></li>
+      </ol>
+    </div>
+
+    <h2 id="s1" class="mt0">1. Qué es MQTT en realidad</h2>
+    <p>
+      MQTT es una oficina de correos para mensajes. Hay un servidor en el medio llamado
+      <strong>broker</strong>. Cualquiera puede publicar un mensaje en una casilla con nombre
+      —un <strong>tópico</strong> (topic)— y cualquier otro puede suscribirse a ese tópico y
+      recibir todo lo que se deje en él.
+    </p>
+    <p>
+      Nada se conecta directamente con nada más. Ese es todo el modelo, y es la razón por la que
+      MQTT le queda bien a Meshtastic: dos mallas separadas por cientos de kilómetros pueden
+      intercambiar paquetes por internet en lugar de por radio, con un broker como punto de encuentro.
+    </p>
+
+    <h2 id="s2">2. Proxy de cliente vs. gateway</h2>
+    <p>Ambos aparecen bajo «MQTT» en la app. No son lo mismo, y aquí empieza casi toda la confusión.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 880 260" role="img" aria-label="Comparación: en modo proxy de cliente el nodo llega al broker a través de un teléfono por Bluetooth; en modo gateway el nodo llega al broker directamente por su propio WiFi o ethernet.">
+        <defs>
+          <marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <polygon points="0,0 10,5 0,10" fill="currentColor"/>
+          </marker>
+        </defs>
+        <text x="200" y="22" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">MODO PROXY DE CLIENTE</text>
+        <text x="672" y="22" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">MODO GATEWAY</text>
+        <line x1="440" y1="34" x2="440" y2="240" stroke="currentColor" stroke-width="1" opacity=".22" stroke-dasharray="4 5"/>
+
+        <rect x="40" y="46" width="120" height="44" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+        <text x="100" y="73" text-anchor="middle" font-size="12" fill="currentColor">Nodo</text>
+        <line x1="160" y1="68" x2="228" y2="68" stroke="currentColor" stroke-width="1.5" marker-end="url(#a1)"/>
+        <text x="194" y="60" text-anchor="middle" font-size="10" fill="currentColor" opacity=".75">BLE</text>
+        <rect x="230" y="46" width="120" height="44" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+        <text x="290" y="73" text-anchor="middle" font-size="12" fill="currentColor">Teléfono</text>
+        <path d="M290 90 L290 150 L360 150" fill="none" stroke="var(--live)" stroke-width="2.2" marker-end="url(#a1)" style="color:var(--live)"/>
+        <text x="298" y="122" font-size="10" fill="var(--live)">datos del teléfono</text>
+
+        <rect x="512" y="46" width="120" height="44" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+        <text x="572" y="73" text-anchor="middle" font-size="12" fill="currentColor">Nodo</text>
+        <path d="M572 90 L572 150 L520 150" fill="none" stroke="var(--live)" stroke-width="2.2" marker-end="url(#a1)" style="color:var(--live)"/>
+        <text x="580" y="122" font-size="10" fill="var(--live)">WiFi / ethernet propio</text>
+
+        <rect x="362" y="128" width="156" height="46" rx="2" fill="none" stroke="var(--live)" stroke-width="2.2"/>
+        <text x="440" y="157" text-anchor="middle" font-size="13" font-weight="600" fill="var(--live)">broker MQTT</text>
+
+        <text x="200" y="212" text-anchor="middle" font-size="11.5" fill="currentColor">El nodo no necesita red propia.</text>
+        <text x="200" y="230" text-anchor="middle" font-size="11.5" fill="currentColor" opacity=".75">Se detiene al cerrar la app.</text>
+        <text x="672" y="212" text-anchor="middle" font-size="11.5" fill="currentColor">El nodo funciona solo, 24/7.</text>
+        <text x="672" y="230" text-anchor="middle" font-size="11.5" fill="currentColor" opacity=".75">Se vuelve una puerta a tu malla.</text>
+      </svg>
+      <figcaption>El proxy toma prestado el internet de tu teléfono. El gateway tiene el suyo propio.</figcaption>
+    </figure>
+
+    <h3>Configurar el modo proxy de cliente</h3>
+    <p>
+      Esto es lo que quieres si tu objetivo es ver tus propios nodos en un mapa o alimentar un
+      tablero. Es la configuración segura.
+    </p>
+<pre><code>mqtt.enabled = true
+mqtt.proxy_to_client_enabled = true
+mqtt.address = tu.broker.ejemplo
+# deja uplink_enabled / downlink_enabled APAGADOS en cada canal</code></pre>
+    <p>
+      Tu nodo igual se reporta al broker. No empieza a empujar el tráfico de todos los demás
+      hacia internet.
+    </p>
+
+    <h3>Configurar el modo gateway</h3>
+<pre><code>network.wifi_enabled = true
+mqtt.enabled = true
+mqtt.proxy_to_client_enabled = false
+mqtt.tls_enabled = true
+mqtt.root = msh/TU_REGION</code></pre>
+    <p>
+      Apagar <code>proxy_to_client_enabled</code> es el interruptor que dice «yo manejo mi propia
+      conexión». El nodo ahora habla con el broker haya o no un teléfono presente.
+    </p>
+    <p>
+      Ser gateway todavía no significa que estés puenteando nada. Por defecto el nodo publica solo
+      sus propios paquetes y nada más. Retransmitir el tráfico de otros nodos es un ajuste aparte.
+    </p>
+
+    <h2 id="s3">3. Uplink, downlink y por qué vienen apagados</h2>
+    <p>
+      Estas dos banderas se configuran <strong>por canal</strong>, en el gateway. Son las que de
+      verdad unen dos mallas.
+    </p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 880 240" role="img" aria-label="El uplink publica al broker los paquetes escuchados en LoRa; el downlink transmite por LoRa local los paquetes que vienen del broker. Con ambos apagados, el gateway publica solo sus propios paquetes.">
+        <defs>
+          <marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <polygon points="0,0 10,5 0,10" fill="currentColor"/>
+          </marker>
+        </defs>
+        <rect x="40" y="60" width="170" height="66" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+        <text x="125" y="88" text-anchor="middle" font-size="13" fill="currentColor">Tu malla local</text>
+        <text x="125" y="108" text-anchor="middle" font-size="10.5" fill="currentColor" opacity=".7">nodos en LoRa</text>
+
+        <rect x="670" y="60" width="170" height="66" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+        <text x="755" y="88" text-anchor="middle" font-size="13" fill="currentColor">Malla lejana</text>
+        <text x="755" y="108" text-anchor="middle" font-size="10.5" fill="currentColor" opacity=".7">otro pueblo</text>
+
+        <rect x="372" y="70" width="136" height="48" rx="2" fill="none" stroke="var(--live)" stroke-width="2.2"/>
+        <text x="440" y="99" text-anchor="middle" font-size="13" font-weight="600" fill="var(--live)">broker</text>
+
+        <path d="M210 82 L364 82" fill="none" stroke="var(--live)" stroke-width="2.2" marker-end="url(#a2)" style="color:var(--live)"/>
+        <text x="287" y="74" text-anchor="middle" font-size="11" font-weight="600" fill="var(--live)">uplink</text>
+        <path d="M364 108 L210 108" fill="none" stroke="var(--live)" stroke-width="2.2" marker-end="url(#a2)" style="color:var(--live)"/>
+        <text x="287" y="126" text-anchor="middle" font-size="11" font-weight="600" fill="var(--live)">downlink</text>
+
+        <path d="M516 82 L666 82" fill="none" stroke="currentColor" stroke-width="1.5" opacity=".55" marker-end="url(#a2)"/>
+        <path d="M666 108 L516 108" fill="none" stroke="currentColor" stroke-width="1.5" opacity=".55" marker-end="url(#a2)"/>
+
+        <line x1="40" y1="166" x2="840" y2="166" stroke="currentColor" stroke-width="1" opacity=".22"/>
+        <text x="40" y="190" font-size="12" font-weight="600" fill="currentColor">Ambas apagadas</text>
+        <text x="176" y="190" font-size="12" fill="currentColor" opacity=".8">— el gateway publica solo sus propios paquetes. Nada cruza.</text>
+        <text x="40" y="214" font-size="12" font-weight="600" fill="var(--signal)">Ambas encendidas</text>
+        <text x="182" y="214" font-size="12" fill="var(--signal)" opacity=".9">— las dos mallas son, para todo efecto práctico, una sola malla.</text>
+      </svg>
+      <figcaption>Uplink y downlink son banderas por canal en el nodo gateway.</figcaption>
+    </figure>
+
+    <div class="box warn">
+      <h3>Por favor, no las enciendas por defecto</h3>
+      <p>
+        <strong>El downlink le cuesta tiempo en el aire a tus vecinos.</strong> Cada mensaje de la
+        malla lejana se retransmite por tu RF local. En un preset lento, eso es tiempo de canal real
+        que le quitas a todos a tu alrededor.
+      </p>
+      <p class="mb0">
+        <strong>Tu lista de nodos se inunda</strong> de nodos distantes que nunca alcanzarás por
+        radio —y <strong>publicas el tráfico de otras personas</strong> en un servidor que ellas
+        nunca aceptaron.
+      </p>
+    </div>
+    <p>
+      Hay una buena razón para encenderlas: tienes dos mallas lejanas y quieres enlazarlas
+      deliberadamente en un canal compartido. Si ese no es tu objetivo, deja ambas apagadas. Vienen
+      apagadas por algo.
+    </p>
+    <p>
+      Si sí vas a puentear, activa uplink y downlink <strong>solo en el canal específico que estás
+      compartiendo</strong> —no en tu canal primario, y no en todos.
+    </p>
+
+    <h2 id="s4">4. «OK to MQTT» — el asesino silencioso de paquetes</h2>
+    <p>Cada nodo lleva un ajuste llamado <code>lora.config_ok_to_mqtt</code>. Por defecto es <strong>false</strong>.</p>
+    <p>
+      Cuando está en false, el nodo marca una bandera dentro de cada paquete que origina que
+      significa «no me pongas en MQTT», y los gateways la respetan. Puedes tener el uplink activado,
+      un broker sano y un gateway que te escucha perfectamente —y tus mensajes aún así nunca se
+      publicarán.
+    </p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 880 250" role="img" aria-label="El Nodo A con ok_to_mqtt en false ve sus paquetes descartados en el gateway; el Nodo B con la bandera en true ve sus paquetes retransmitidos al broker. Ambos nodos se escuchan igual de bien.">
+        <defs>
+          <marker id="a3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <polygon points="0,0 10,5 0,10" fill="currentColor"/>
+          </marker>
+        </defs>
+        <rect x="40" y="40" width="180" height="54" rx="2" fill="none" stroke="var(--signal)" stroke-width="1.8"/>
+        <text x="130" y="64" text-anchor="middle" font-size="12.5" fill="var(--signal)">Nodo A</text>
+        <text x="130" y="82" text-anchor="middle" font-size="10.5" font-family="monospace" fill="var(--signal)">ok_to_mqtt = false</text>
+
+        <rect x="40" y="152" width="180" height="54" rx="2" fill="none" stroke="var(--live)" stroke-width="1.8"/>
+        <text x="130" y="176" text-anchor="middle" font-size="12.5" fill="var(--live)">Nodo B</text>
+        <text x="130" y="194" text-anchor="middle" font-size="10.5" font-family="monospace" fill="var(--live)">ok_to_mqtt = true</text>
+
+        <path d="M220 74 L342 104" fill="none" stroke="var(--signal)" stroke-width="1.8" marker-end="url(#a3)" style="color:var(--signal)"/>
+        <path d="M220 172 L342 142" fill="none" stroke="var(--live)" stroke-width="1.8" marker-end="url(#a3)" style="color:var(--live)"/>
+        <text x="258" y="80" font-size="10" fill="currentColor" opacity=".65">se escucha bien</text>
+        <text x="258" y="182" font-size="10" fill="currentColor" opacity=".65">se escucha bien</text>
+
+        <rect x="348" y="92" width="150" height="62" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+        <text x="423" y="118" text-anchor="middle" font-size="12.5" fill="currentColor">Gateway</text>
+        <text x="423" y="136" text-anchor="middle" font-size="10.5" fill="currentColor" opacity=".7">uplink ACTIVADO</text>
+
+        <line x1="498" y1="110" x2="596" y2="110" stroke="var(--signal)" stroke-width="1.8" stroke-dasharray="5 4"/>
+        <line x1="590" y1="100" x2="608" y2="120" stroke="var(--signal)" stroke-width="2.6"/>
+        <line x1="608" y1="100" x2="590" y2="120" stroke="var(--signal)" stroke-width="2.6"/>
+        <text x="620" y="114" font-size="11.5" fill="var(--signal)">descartado, sin error</text>
+
+        <line x1="498" y1="140" x2="672" y2="140" stroke="var(--live)" stroke-width="2.2" marker-end="url(#a3)" style="color:var(--live)"/>
+        <rect x="680" y="122" width="140" height="38" rx="2" fill="none" stroke="var(--live)" stroke-width="2.2"/>
+        <text x="750" y="146" text-anchor="middle" font-size="12" font-weight="600" fill="var(--live)">broker</text>
+
+        <line x1="40" y1="226" x2="840" y2="226" stroke="currentColor" stroke-width="1" opacity=".22"/>
+        <text x="40" y="246" font-size="11.5" fill="currentColor" opacity=".85">El nodo que envía decide si puede ser puenteado —no el operador del gateway.</text>
+      </svg>
+      <figcaption>Misma señal, mismo gateway, mismo broker. Solo cambia la bandera.</figcaption>
+    </figure>
+
+<pre><code>meshtastic --port COM11 --set lora.config_ok_to_mqtt true
+
+# luego confirma que quedó
+meshtastic --port COM11 --info | grep configOkToMqtt</code></pre>
+    <p>
+      En la app está bajo <strong>LoRa → Avanzado</strong>; el texto cambia entre versiones, así que
+      busca «OK to MQTT» o «MQTT OK». Vuelve a leerlo después de configurarlo, y revísalo otra vez
+      tras una actualización de firmware —a mí se me revirtió a mitad de sesión y perdí veinte
+      minutos echándole la culpa al gateway.
+    </p>
+    <div class="box ok">
+      <h3>Si recuerdas una sola cosa</h3>
+      <p class="mb0">
+        «Veo sus mensajes pero ellos no ven los míos» es casi siempre esta bandera —no un desajuste
+        de firmware, no un problema del broker. Revísala primero.
+      </p>
+    </div>
+
+    <h2 id="s5">5. Tópicos protobuf y JSON</h2>
+    <p>
+      Bajo tu tópico raíz hay dos ramas, y saber cuál estás mirando explica la mayoría de los
+      reportes de «mi tablero no muestra nada».
+    </p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 880 270" role="img" aria-label="Árbol de tópicos: la rama barra-e lleva protobuf cifrado, así que el broker solo ve texto cifrado, mientras que la rama barra-json lleva texto plano que el gateway descifró primero.">
+        <defs>
+          <marker id="a4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <polygon points="0,0 10,5 0,10" fill="currentColor"/>
+          </marker>
+        </defs>
+        <rect x="370" y="20" width="140" height="38" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+        <text x="440" y="45" text-anchor="middle" font-size="13" font-family="monospace" fill="currentColor">msh/PA/2</text>
+
+        <path d="M400 58 L250 96" fill="none" stroke="currentColor" stroke-width="1.6" marker-end="url(#a4)"/>
+        <path d="M480 58 L630 96" fill="none" stroke="currentColor" stroke-width="1.6" marker-end="url(#a4)"/>
+
+        <rect x="110" y="100" width="280" height="44" rx="2" fill="none" stroke="var(--live)" stroke-width="2.2"/>
+        <text x="250" y="128" text-anchor="middle" font-size="13" font-family="monospace" fill="var(--live)">/e/  — protobuf</text>
+
+        <rect x="490" y="100" width="280" height="44" rx="2" fill="none" stroke="var(--signal)" stroke-width="2.2"/>
+        <text x="630" y="128" text-anchor="middle" font-size="13" font-family="monospace" fill="var(--signal)">/json/ — texto plano</text>
+
+        <text x="250" y="170" text-anchor="middle" font-size="11.5" fill="currentColor">Sigue cifrado con la llave de tu canal</text>
+        <text x="250" y="190" text-anchor="middle" font-size="11.5" font-weight="600" fill="var(--live)">El broker solo ve texto cifrado</text>
+
+        <text x="630" y="170" text-anchor="middle" font-size="11.5" fill="currentColor">El gateway debe descifrarlo para armar el JSON</text>
+        <text x="630" y="190" text-anchor="middle" font-size="11.5" font-weight="600" fill="var(--signal)">El broker ve tus mensajes</text>
+
+        <line x1="60" y1="216" x2="820" y2="216" stroke="currentColor" stroke-width="1" opacity=".22"/>
+        <text x="60" y="238" font-size="12" font-family="monospace" fill="currentColor">msh/PA/2/e/MESHPTY/!cce742aa</text>
+        <text x="60" y="258" font-size="11" fill="currentColor" opacity=".7">raíz / versión / codificación / nombre del canal / gateway que publica</text>
+      </svg>
+      <figcaption>Dos codificaciones del mismo paquete —una mantiene tu llave fuera, la otra no.</figcaption>
+    </figure>
+
+    <p>
+      Protobuf es el valor por defecto y casi siempre la opción correcta: compacto, cifrado de
+      extremo a extremo, y legible por toda herramienta de Meshtastic. JSON es cómodo para Node-RED
+      o Home Assistant porque no hay que decodificar nada —pero producirlo obliga al gateway a
+      descifrar primero, así que tu texto plano termina en el broker.
+    </p>
+    <div class="box info">
+      <h3>En un canal privado</h3>
+      <p class="mb0">
+        Deja <code>json_enabled</code> apagado. Encenderlo publica exactamente lo que tu PSK de canal
+        estaba protegiendo. Si quieres datos legibles, suscríbete al tópico protobuf y descífralo
+        localmente —tú tienes la llave, el broker no la necesita.
+      </p>
+    </div>
+
+    <h2 id="s6">6. El firmware 2.8 rompe los DM a través de un gateway</h2>
+    <p>
+      Los mensajes directos van cifrados de extremo a extremo entre dos nodos. Un gateway que
+      transporta el DM de otra persona genuinamente no puede leerlo —el mensaje no está dirigido al
+      gateway.
+    </p>
+    <p>
+      En 2.7 esto no importaba. El gateway reenviaba el bloque cifrado a MQTT sin leerlo, y el otro
+      extremo lo descifraba. Así cruzaban los DM un puente.
+    </p>
+    <p>
+      En 2.8 un paquete que el gateway no puede descifrar se clasifica como <em>opaco</em> (opaque),
+      y el tráfico opaco se excluye deliberadamente de MQTT.
+    </p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 880 250" role="img" aria-label="En el firmware 2.8, un mensaje directo que pasa por un gateway se retransmite por LoRa pero nunca se publica en MQTT, porque el gateway no puede descifrarlo.">
+        <defs>
+          <marker id="a5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <polygon points="0,0 10,5 0,10" fill="currentColor"/>
+          </marker>
+        </defs>
+        <rect x="40" y="96" width="150" height="58" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+        <text x="115" y="120" text-anchor="middle" font-size="12.5" fill="currentColor">Tu nodo</text>
+        <text x="115" y="139" text-anchor="middle" font-size="10.5" fill="currentColor" opacity=".7">DM → un amigo</text>
+
+        <line x1="190" y1="125" x2="286" y2="125" stroke="currentColor" stroke-width="1.8" marker-end="url(#a5)"/>
+        <text x="238" y="116" text-anchor="middle" font-size="10" fill="currentColor" opacity=".65">LoRa</text>
+
+        <rect x="292" y="82" width="196" height="86" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+        <text x="390" y="108" text-anchor="middle" font-size="12.5" fill="currentColor">Gateway en 2.8</text>
+        <text x="390" y="127" text-anchor="middle" font-size="10.5" fill="currentColor" opacity=".72">no puede descifrar — no es para él</text>
+        <text x="390" y="152" text-anchor="middle" font-size="11" font-family="monospace" fill="var(--signal)">OPAQUE_RELAY_ONLY</text>
+
+        <path d="M488 104 L634 62" fill="none" stroke="var(--live)" stroke-width="2.2" marker-end="url(#a5)" style="color:var(--live)"/>
+        <text x="644" y="54" font-size="12" font-weight="600" fill="var(--live)">Retransmisión LoRa ✓</text>
+        <text x="644" y="72" font-size="10.5" fill="var(--live)" opacity=".85">la malla local igual lo recibe</text>
+
+        <line x1="488" y1="150" x2="620" y2="186" stroke="var(--signal)" stroke-width="2.2" stroke-dasharray="5 4"/>
+        <line x1="614" y1="176" x2="632" y2="196" stroke="var(--signal)" stroke-width="2.6"/>
+        <line x1="632" y1="176" x2="614" y2="196" stroke="var(--signal)" stroke-width="2.6"/>
+        <text x="644" y="182" font-size="12" font-weight="600" fill="var(--signal)">MQTT ✕</text>
+        <text x="644" y="200" font-size="10.5" fill="var(--signal)" opacity=".85">nunca se publica, sin error</text>
+
+        <line x1="40" y1="226" x2="840" y2="226" stroke="currentColor" stroke-width="1" opacity=".22"/>
+        <text x="40" y="245" font-size="11.5" fill="currentColor" opacity=".85">Los DM hacia o desde el propio gateway no se ven afectados —esos sí los puede descifrar.</text>
+      </svg>
+      <figcaption>Router.cpp:1613 retorna temprano ante el tráfico opaco, antes de llegar siquiera a la publicación MQTT.</figcaption>
+    </figure>
+
+    <p>El firmware declara la intención sin rodeos, en <code>NextHopRouter.cpp</code>:</p>
+<pre><code>// Opaque traffic is never admitted to PacketHistory, NodeDB,
+// modules, phone, MQTT, or ACK handling.</code></pre>
+    <p>
+      Introducido por el <a href="https://github.com/meshtastic/firmware/pull/10967" target="_blank" rel="noopener">PR #10967</a>,
+      «feat(security): enforce packet authenticity policies». Ningún ajuste de configuración lo
+      sortea —la opción <code>packet_signature_policy</code> gobierna cómo se <em>reciben</em> los
+      paquetes y solo aplica al tráfico que el nodo ya puede descifrar. Compatible, Balanced y
+      Strict toman todos el mismo camino opaco.
+    </p>
+    <div class="box stop">
+      <h3>Efecto práctico</h3>
+      <p>
+        En 2.8 no puedes mandar un DM a alguien a través de un puente MQTT. Los mensajes de canal
+        siguen funcionando. Los DM al propio gateway siguen funcionando. Un DM que pasa
+        <em>a través</em>, dirigido a un tercer nodo, muere en el gateway sin ningún error en ninguna
+        parte.
+      </p>
+      <p class="mb0">
+        Si los DM puenteados te importan, <code>v2.7.26</code> es el último lanzamiento sin este
+        comportamiento.
+      </p>
+    </div>
+
+    <h2 id="s7">7. El firmware 2.8 casi duplica tu tiempo en el aire</h2>
+    <p>
+      El mismo PR agregó una firma XEdDSA a cada transmisión (broadcast): 64 bytes, más dos bytes de
+      sobrecarga de protobuf, en cada paquete sin importar el largo del mensaje.
+    </p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 880 250" role="img" aria-label="Un mensaje de 14 caracteres en firmware 2.7 se codifica en 20 bytes; un mensaje de 4 caracteres en 2.8 se codifica en 76 bytes por una firma de 66 bytes, subiendo el tiempo en el aire de 477 a 928 milisegundos.">
+        <text x="40" y="34" font-size="12.5" font-weight="600" fill="currentColor">Firmware 2.7 — «Prueba meshpty», 14 caracteres</text>
+        <rect x="40" y="44" width="46" height="34" fill="none" stroke="currentColor" stroke-width="1.5"/>
+        <rect x="86" y="44" width="186" height="34" fill="none" stroke="currentColor" stroke-width="1.5"/>
+        <rect x="272" y="44" width="30" height="34" fill="none" stroke="currentColor" stroke-width="1.5"/>
+        <text x="63" y="66" text-anchor="middle" font-size="10" fill="currentColor">puerto</text>
+        <text x="179" y="66" text-anchor="middle" font-size="10.5" fill="currentColor">carga útil</text>
+        <text x="287" y="66" text-anchor="middle" font-size="9" fill="currentColor">bf</text>
+        <text x="316" y="66" font-size="12" font-family="monospace" font-weight="600" fill="currentColor">20 bytes</text>
+
+        <text x="40" y="124" font-size="12.5" font-weight="600" fill="currentColor">Firmware 2.8 — «test», 4 caracteres</text>
+        <rect x="40" y="134" width="46" height="34" fill="none" stroke="currentColor" stroke-width="1.5"/>
+        <rect x="86" y="134" width="54" height="34" fill="none" stroke="currentColor" stroke-width="1.5"/>
+        <rect x="140" y="134" width="30" height="34" fill="none" stroke="currentColor" stroke-width="1.5"/>
+        <rect x="170" y="134" width="450" height="34" fill="none" stroke="var(--signal)" stroke-width="2.4"/>
+        <text x="63" y="156" text-anchor="middle" font-size="10" fill="currentColor">puerto</text>
+        <text x="113" y="156" text-anchor="middle" font-size="10" fill="currentColor">msg</text>
+        <text x="155" y="156" text-anchor="middle" font-size="9" fill="currentColor">bf</text>
+        <text x="395" y="156" text-anchor="middle" font-size="12" fill="var(--signal)">firma XEdDSA — 66 bytes</text>
+        <text x="634" y="156" font-size="12" font-family="monospace" font-weight="600" fill="var(--signal)">76 bytes</text>
+
+        <line x1="40" y1="196" x2="840" y2="196" stroke="currentColor" stroke-width="1" opacity=".22"/>
+        <text x="40" y="220" font-size="12" fill="currentColor">Tiempo en el aire en LONG_FAST (SF11 / BW250 / CR4-5), mensaje de cuatro caracteres:</text>
+        <text x="40" y="242" font-size="15" font-weight="700" fill="var(--signal)">477 ms  →  928 ms   (1.94×)</text>
+      </svg>
+      <figcaption>Un mensaje de cuatro caracteres en 2.8 pesa más en el aire que uno de catorce en 2.7.</figcaption>
+    </figure>
+
+    <p>
+      La firma solo está condicionada por <code>!pki_encrypted &amp;&amp; isBroadcast(to)</code> —no
+      hay ajuste en tiempo de ejecución. Desactivarla significa una compilación personalizada con
+      <code>MESHTASTIC_EXCLUDE_XEDDSA</code>. En un canal concurrido, esto conviene saberlo antes de
+      actualizar una flota.
+    </p>
+
+    <h2 id="s8">8. Qué se rompe de verdad entre versiones</h2>
+    <p>
+      Circula la afirmación de que los nodos 2.7 no pueden recibir de nodos 2.8. Yo me la creí,
+      luego revisé el código fuente —no es cierto. Protobuf está hecho para esto: nanopb llega al
+      campo de firma desconocido, lo salta y sigue (<code>pb_decode.c</code>, «No match found, skip
+      data»).
+    </p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead><tr><th>Escenario</th><th>¿Funciona?</th><th>Por qué</th></tr></thead>
+        <tbody>
+          <tr><td>Nodo 2.8 recibe de 2.7</td><td class="y">Sí</td><td>Nada raro en el paquete</td></tr>
+          <tr><td>Nodo 2.7 recibe de 2.8</td><td class="y">Sí</td><td>El campo de firma desconocido se salta</td></tr>
+          <tr><td>2.8 recibe de &lt; 2.5.0</td><td class="n">No</td><td>Descarte pre-hop; esos paquetes no llevan datos de saltos</td></tr>
+          <tr><td>DM a través de un gateway 2.8</td><td class="n">No</td><td>El tráfico opaco se excluye de MQTT</td></tr>
+          <tr><td>Paquete sin firmar de un firmante conocido, bajo Balanced/Strict</td><td class="n">No</td><td>Se trata como intento de downgrade</td></tr>
+          <tr><td>Cualquier nodo sin <code>ok_to_mqtt</code></td><td class="n">No</td><td>El gateway respeta la bandera y lo descarta</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      Si tu síntoma es «ellos me ven pero yo no los veo», o al revés, la causa abrumadoramente
+      probable es la bandera <code>ok_to_mqtt</code> o un canal con el uplink desactivado —no un
+      desajuste de versión.
+    </p>
+
+    <h2 id="s9">9. Lista de verificación</h2>
+    <ol class="plain">
+      <li>¿Estás en modo <strong>proxy</strong> o <strong>gateway</strong>? Confirma que <code>proxy_to_client_enabled</code> coincide con tu intención.</li>
+      <li>¿Está <code>uplink_enabled</code> activado para el canal específico que estás probando —no solo el primario?</li>
+      <li>¿Está <code>lora.config_ok_to_mqtt</code> en <strong>true</strong> en el nodo que <em>envía</em>? Vuelve a leerlo.</li>
+      <li>¿Acabas de cambiar <strong>downlink</strong>? <strong>Reinicia el gateway.</strong> Las suscripciones se construyen solo cuando la sesión MQTT se conecta, así que publicar funcionará mientras que recibir, en silencio, nunca lo hará.</li>
+      <li>¿Estás mirando el tópico correcto? El protobuf cae bajo <code>/2/e/</code>; la rama <code>/2/json/</code> está vacía a menos que <code>json_enabled</code> esté encendido.</li>
+      <li>¿Esperas que un DM cruce el puente? En 2.8 no lo hará. Usa un mensaje de canal, o corre 2.7.26.</li>
+      <li>¿Sigues atascado? Suscríbete tú mismo a <code>msh/#</code> y observa. Si aparecen los paquetes de tu propio gateway pero no los retransmitidos, es la bandera del paso 3.</li>
+    </ol>
+
+    <div class="box info">
+      <h3>Sobre esta guía</h3>
+      <p class="mb0">
+        Se agradecen correcciones. Las referencias de firmware son a <code>b68de08</code> (2.8.0) y
+        <code>v2.7.26.54e0d8d</code>; las cifras de tiempo en el aire están calculadas para
+        SF11 / BW250 / CR4-5 y variarán en otros presets.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div class="col">
+        <h4>Empezar</h4>
+        <a href="comprar.html">Guía de compra</a>
+        <a href="instalar.html">Firmware y configuración</a>
+        <a href="faq.html">Preguntas frecuentes</a>
+      </div>
+      <div class="col">
+        <h4>La red</h4>
+        <a href="nodos-fijos.html">Infraestructura</a>
+        <a href="mapa.html">Mapa y cobertura</a>
+        <a href="carta-azotea.html">Permiso de azotea</a>
+        <a href="mqtt.html">Guía MQTT</a>
+        <a href="sin-senal.html">Cuando se cae la señal</a>
+        <a href="legal.html">Regulación (ASEP)</a>
+        <a href="comunidad.html">Comunidad</a>
+      </div>
+      <div class="col">
+        <h4>Oficial</h4>
+        <a href="https://meshtastic.org" target="_blank" rel="noopener">meshtastic.org</a>
+        <a href="https://meshtastic.org/docs/configuration/module/mqtt/" target="_blank" rel="noopener">Docs · MQTT</a>
+      </div>
+    </div>
+
+    <div class="fine">
+      <p>
+        <strong>MeshPTY</strong> — comunidad independiente de usuarios en Panamá.
+        Contacto: <a href="mailto:alvaroenoht@gmail.com">alvaroenoht@gmail.com</a>
+      </p>
+      <p>
+        MeshPTY es un grupo comunitario independiente y sin fines de lucro. <strong>No está
+        afiliado, patrocinado ni respaldado por Meshtastic LLC.</strong> Meshtastic® es una marca
+        registrada de Meshtastic LLC.
+      </p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
