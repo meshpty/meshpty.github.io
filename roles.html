@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Qué rol ponerle a tu nodo — MeshPTY</title>
+<meta name="description" content="Guía fácil para elegir el rol de tu nodo Meshtastic según dónde está: cima, azotea, balcón o bolsillo. ROUTER, ROUTER_LATE, CLIENT, CLIENT_BASE y CLIENT_MUTE, explicados sin humo.">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#14181c">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="MeshPTY">
+<meta property="og:title" content="Qué rol ponerle a tu nodo — MeshPTY">
+<meta property="og:description" content="Guía fácil para elegir el rol de tu nodo Meshtastic según dónde está: cima, azotea, balcón o bolsillo.">
+<meta property="og:image" content="https://meshpty.github.io/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<a class="skip" href="#main">Saltar al contenido</a>
+
+<nav>
+  <div class="wrap-wide">
+    <a class="brand" href="index.html"><span class="dot"></span>Mesh<b>PTY</b></a>
+    <div class="links">
+      <a href="index.html">Inicio</a>
+      <a href="comprar.html">Guía de compra</a>
+      <a href="instalar.html">Firmware</a>
+      <a href="roles.html" aria-current="page">Roles</a>
+      <a href="nodos-fijos.html">Infraestructura</a>
+      <a href="carta-azotea.html">Permiso azotea</a>
+      <a href="mqtt.html">MQTT</a>
+      <a href="faq.html">Preguntas</a>
+      <a href="comunidad.html">Comunidad</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+
+<div class="phead">
+  <div class="wrap">
+    <span class="eyebrow">Configuración</span>
+    <h1>Qué rol ponerle a tu nodo</h1>
+    <p>
+      El rol le dice a tu nodo cómo comportarse en la malla. Es de las decisiones que más afectan a
+      toda la red — y la más fácil de equivocar. La regla corta: <strong>elige por dónde está el
+      nodo, no por lo importante que te sientas.</strong>
+    </p>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <h2 class="mt0">Antes que nada</h2>
+    <p>
+      Todos los nodos retransmiten los mensajes de los demás para que lleguen más lejos. El rol
+      define <strong>cuánto</strong> y <strong>con qué prioridad</strong> retransmite el tuyo. Poner
+      un rol de infraestructura a un nodo mal ubicado no ayuda: repite todo, choca con los demás en
+      el aire, y gasta batería y tiempo de canal de toda la comunidad.
+    </p>
+
+    <div class="box warn">
+      <h3>La regla de oro</h3>
+      <p class="mb0">
+        <strong>No uses ROUTER por defecto.</strong> ROUTER es solo para los poquísimos sitios que
+        dominan la geografía. Para todo lo demás hay un rol mejor. Si tienes dudas, tu nodo es
+        <strong>CLIENT</strong> — nunca te va a hacer daño.
+      </p>
+    </div>
+
+    <h3>Tabla rápida</h3>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead><tr><th>Dónde está el nodo</th><th>Rol</th><th>En una línea</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Cima que domina la ciudad</strong><br>Cerro Jefe, Cerro Ancón</td><td><code>ROUTER</code></td><td>Columna vertebral. Solo los mejores puntos.</td></tr>
+          <tr><td><strong>Azotea de edificio</strong> (infraestructura)</td><td><code>ROUTER_LATE</code></td><td>Repite igual que ROUTER pero sin hacer tanto ruido.</td></tr>
+          <tr><td><strong>Balcón o ventana</strong></td><td><code>CLIENT</code><br><span class="muted">o <code>CLIENT_BASE</code></span></td><td>Participas sin cargar la malla; CLIENT_BASE si quieres priorizar la infra que ves.</td></tr>
+          <tr><td><strong>En tu bolsillo o mochila</strong></td><td><code>CLIENT</code></td><td>El rol por defecto. La opción segura.</td></tr>
+          <tr><td><strong>Tu 2.º, 3.º… nodo personal</strong></td><td><code>CLIENT_MUTE</code></td><td>No repite: no gasta aire ni batería ajena.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="cima">
+  <div class="wrap">
+    <h2>Nodo en una cima que domina la geografía</h2>
+    <p class="sub">Rol: <code>ROUTER</code> (o <code>REPEATER</code>).</p>
+    <p>
+      Si tu nodo está en uno de los puntos más altos y dominantes del área — en la capital sería algo
+      como <strong>Cerro Jefe</strong> o <strong>Cerro Ancón</strong> — entonces sí, puede ser un
+      ROUTER. Estos nodos son la columna vertebral: retransmiten con prioridad, "cortan la fila" para
+      que el mensaje siga rápido, y por eso solo tienen sentido donde de verdad ven muchísimo.
+    </p>
+    <div class="box stop">
+      <h3>ROUTER no es un premio</h3>
+      <p class="mb0">
+        Un ROUTER en un mal punto es lo peor que le puede pasar a la malla: repite todo lo que oye,
+        con prioridad, chocando con los demás. <strong>Si no estás en una cima que ve media ciudad,
+        esto no es para ti.</strong>
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="azotea">
+  <div class="wrap">
+    <h2>Nodo en una azotea de edificio</h2>
+    <p class="sub">Rol: <code>ROUTER_LATE</code>.</p>
+    <p>
+      Una azotea es un punto alto excelente, pero normalmente no domina toda la geografía como una
+      cima. Para eso está <strong>ROUTER_LATE</strong>: retransmite <em>obligatoriamente</em> igual
+      que un ROUTER, pero <strong>espera su turno</strong> en vez de transmitir primero. Hace el mismo
+      trabajo de infraestructura con mucho menos ruido y menos colisiones.
+    </p>
+    <p>
+      Agrega como <strong>favoritos</strong> a los otros nodos <code>ROUTER</code> o
+      <code>ROUTER_LATE</code> que tu azotea ve directo. Cuando la infraestructura se marca como
+      favorita entre sí, los saltos entre esos nodos <strong>dejan de contar</strong> — más abajo
+      explicamos exactamente por qué y con qué condiciones.
+    </p>
+
+    <div class="box info">
+      <h3>Difícil acceso: adminístralo por la malla</h3>
+      <p>
+        Si el nodo queda en un sitio incómodo de alcanzar, configura la <strong>administración
+        remota</strong> antes de subirlo: guarda la <strong>llave pública de tu nodo personal</strong>
+        en los parámetros de administración del nodo de azotea. Así podrás gestionarlo por la propia
+        malla — cambiar ajustes y <strong>agregar o quitar favoritos por CLI</strong> — sin volver a
+        bajarlo. Los comandos están <a href="#cli">más abajo</a>.
+      </p>
+      <p class="mb0">
+        ¿Vas a montar en una azotea que no es tuya? Mira la <a href="nodos-fijos.html">guía de
+        infraestructura</a> y pide permiso con la <a href="carta-azotea.html">carta modelo</a>.
+      </p>
+    </div>
+
+    <div class="box info">
+      <h3>Alternativa: CLIENT_BASE</h3>
+      <p class="mb0">
+        Si tu nodo de azotea sirve sobre todo a <strong>tus propios nodos</strong> (y no tanto como
+        columna vertebral de la comunidad), la documentación oficial recomienda
+        <code>CLIENT_BASE</code>: prioriza los paquetes hacia y desde los nodos que marcas como
+        favoritos, sin "cortar la fila" como un router.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="balcon">
+  <div class="wrap">
+    <h2>Nodo de balcón o ventana</h2>
+    <p class="sub">Rol: <code>CLIENT</code> — o <code>CLIENT_BASE</code> si quieres apurar un poco.</p>
+    <p>
+      Un nodo asomado a un balcón o una ventana ya aporta: ve más lejos que uno a nivel de calle y
+      participa en la malla. Con <code>CLIENT</code> a secas ya está bien.
+    </p>
+    <p>
+      Si quieres que además haga de pequeña estación base, ponlo en <code>CLIENT_BASE</code> y agrega
+      como favoritos a los nodos de infraestructura (<code>ROUTER</code> / <code>ROUTER_LATE</code>)
+      que ve directo. Así <strong>se ahorra un salto</strong> al hablar con esa infraestructura, y le
+      da prioridad.
+    </p>
+  </div>
+</section>
+
+<section id="personal">
+  <div class="wrap">
+    <h2>Tu nodo personal (el de bolsillo)</h2>
+    <p class="sub">Rol: <code>CLIENT</code>. Si tienes varios, los extra van en <code>CLIENT_MUTE</code>.</p>
+    <p>
+      El nodo que cargas contigo va en <code>CLIENT</code>: manda y recibe, y ayuda a repetir un
+      poco. Es el rol por defecto y la elección correcta para casi todo el mundo.
+    </p>
+    <p>
+      ¿Tienes <strong>más de un nodo personal</strong>? Deja uno en <code>CLIENT</code> y pon los
+      demás en <code>CLIENT_MUTE</code>. Un nodo CLIENT_MUTE solo envía y recibe lo suyo:
+      <strong>no repite</strong> el tráfico ajeno. Así dos o tres radios en tu mochila no se ponen a
+      repetir el mismo mensaje tres veces ni te vacían la batería sin necesidad.
+    </p>
+  </div>
+</section>
+
+<section id="saltos">
+  <div class="wrap">
+    <h2>Por qué los favoritos ahorran saltos</h2>
+    <p>
+      Cada mensaje nace con un límite de saltos (<em>hop limit</em>) y, normalmente, cada vez que un
+      nodo lo retransmite, ese contador baja en uno. Cuando llega a cero, el mensaje muere. Por eso
+      la distancia real de la malla es limitada.
+    </p>
+    <p>
+      Desde el firmware <strong>2.7.11</strong>, Meshtastic tiene los <strong>"saltos gratis"</strong>
+      (<em>zero-cost hops</em>) entre infraestructura favorita: un salto <strong>no descuenta</strong>
+      del contador cuando se cumplen las tres condiciones a la vez.
+    </p>
+
+    <div class="box ok">
+      <h3>Un salto es "gratis" cuando…</h3>
+      <ul class="mb0">
+        <li>tu nodo es <code>ROUTER</code>, <code>ROUTER_LATE</code> o <code>CLIENT_BASE</code>; <strong>y</strong></li>
+        <li>no es el primer salto del paquete; <strong>y</strong></li>
+        <li>el nodo anterior que lo retransmitió está en tus <strong>favoritos</strong> <strong>y</strong> es <code>ROUTER</code> o <code>ROUTER_LATE</code>.</li>
+      </ul>
+    </div>
+
+    <p>
+      Por eso la recomendación es que los nodos de infraestructura se marquen como favoritos
+      <strong>mutuamente</strong>. El resultado:
+    </p>
+    <ul class="plain">
+      <li><strong>Los mensajes llegan más lejos</strong> por la columna vertebral sin gastar saltos, y todavía les quedan saltos para el "último tramo" hasta tu bolsillo.</li>
+      <li><strong>Menos saturación:</strong> la malla no se llena de repeticiones innecesarias.</li>
+      <li><strong>Menos batería:</strong> los nodos transmiten solo cuando de verdad hace falta.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="router-late">
+  <div class="wrap">
+    <h2>ROUTER vs. ROUTER_LATE, en corto</h2>
+    <div class="grid g2">
+      <div class="card">
+        <h3><code>ROUTER</code></h3>
+        <p class="mb0">
+          Retransmite con <strong>prioridad</strong>: se adelanta a los demás. Perfecto desde una
+          cima que ve todo, porque el mensaje sigue rápido. Malo en cualquier otro lado, porque
+          "corta la fila" y provoca choques.
+        </p>
+      </div>
+      <div class="card">
+        <h3><code>ROUTER_LATE</code></h3>
+        <p class="mb0">
+          Hace el <strong>mismo trabajo</strong> — retransmite siempre — pero <strong>espera su
+          turno</strong> en vez de transmitir primero. Menos ruido, menos colisiones. Es la opción
+          responsable para infraestructura que no está en el punto más dominante posible.
+        </p>
+      </div>
+    </div>
+    <p class="muted" style="margin-top:20px">
+      En la práctica: si dudas entre ROUTER y ROUTER_LATE, usa <strong>ROUTER_LATE</strong>.
+    </p>
+  </div>
+</section>
+
+<section id="cli">
+  <div class="wrap">
+    <h2>Favoritos y administración remota por CLI</h2>
+    <p>
+      Puedes marcar y desmarcar favoritos desde la app, o con la
+      <a href="https://meshtastic.org/docs/software/python/cli/" target="_blank" rel="noopener">CLI de Python</a>.
+      Usa el ID del nodo (con <code>!</code> delante):
+    </p>
+<pre><code># agregar un favorito
+meshtastic --set-favorite-node '!a1b2c3d4'
+
+# quitar un favorito
+meshtastic --remove-favorite-node '!a1b2c3d4'</code></pre>
+
+    <h3>Gestionar un nodo remoto (por ejemplo, el de la azotea)</h3>
+    <p>
+      Con la administración remota (firmware 2.5+) autorizas a tu nodo personal a mandarle comandos a
+      otro por la malla. Se hace una sola vez, con el nodo a mano:
+    </p>
+<pre><code># 1. en tu nodo personal: copia su llave pública
+meshtastic --get security.public_key
+
+# 2. en el nodo de azotea (antes de subirlo): autoriza esa llave
+meshtastic --set security.admin_key "base64:PEGA_AQUI_LA_LLAVE_PUBLICA"</code></pre>
+    <p>Después, ya montado, lo gestionas a distancia con <code>--dest</code>:</p>
+<pre><code># agregar un favorito en el nodo remoto, por la malla
+meshtastic --dest '!nododeazotea' --set-favorite-node '!a1b2c3d4'</code></pre>
+    <div class="box info">
+      <h3>Detalles</h3>
+      <p class="mb0">
+        Por administración remota solo funcionan <code>--set</code> y <code>--get</code> (y sus
+        variantes, como agregar/quitar favoritos). Cada nodo admite hasta <strong>3 llaves de
+        administración</strong>, así que puedes gestionarlo desde varios nodos tuyos.
+        <a href="https://meshtastic.org/docs/configuration/remote-admin/" target="_blank" rel="noopener">Guía oficial de administración remota →</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="box info">
+      <h3>Sobre esta guía</h3>
+      <p class="mb0">
+        Los roles y el comportamiento de los "saltos gratis" están verificados contra la
+        documentación oficial de Meshtastic:
+        <a href="https://meshtastic.org/blog/choosing-the-right-device-role/" target="_blank" rel="noopener">elegir el rol correcto</a>,
+        <a href="https://meshtastic.org/blog/demystifying-router-late/" target="_blank" rel="noopener">ROUTER_LATE</a> y
+        <a href="https://meshtastic.org/blog/zero-cost-hops-favorite-routers/" target="_blank" rel="noopener">zero-cost hops</a>.
+        La función de saltos gratis requiere firmware 2.7.11 o superior.
+      </p>
+    </div>
+
+    <hr class="rule">
+
+    <div class="cta">
+      <a class="btn primary" href="nodos-fijos.html">Montar un nodo fijo →</a>
+      <a class="btn" href="mqtt.html">Conectar a MQTT</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div class="col">
+        <h4>Empezar</h4>
+        <a href="comprar.html">Guía de compra</a>
+        <a href="instalar.html">Firmware y configuración</a>
+        <a href="faq.html">Preguntas frecuentes</a>
+      </div>
+      <div class="col">
+        <h4>La red</h4>
+        <a href="nodos-fijos.html">Infraestructura</a>
+        <a href="roles.html">Roles de nodo</a>
+        <a href="mapa.html">Mapa y cobertura</a>
+        <a href="carta-azotea.html">Permiso de azotea</a>
+        <a href="mqtt.html">Guía MQTT</a>
+        <a href="sin-senal.html">Cuando se cae la señal</a>
+        <a href="legal.html">Regulación (ASEP)</a>
+        <a href="comunidad.html">Comunidad</a>
+      </div>
+      <div class="col">
+        <h4>Oficial</h4>
+        <a href="https://meshtastic.org" target="_blank" rel="noopener">meshtastic.org</a>
+        <a href="https://meshtastic.org/docs/configuration/radio/device/" target="_blank" rel="noopener">Docs · Roles</a>
+      </div>
+    </div>
+
+    <div class="fine">
+      <p>
+        <strong>MeshPTY</strong> — comunidad independiente de usuarios en Panamá.
+        Contacto: <a href="mailto:alvaroenoht@gmail.com">alvaroenoht@gmail.com</a>
+      </p>
+      <p>
+        MeshPTY es un grupo comunitario independiente y sin fines de lucro. <strong>No está
+        afiliado, patrocinado ni respaldado por Meshtastic LLC.</strong> Meshtastic® es una marca
+        registrada de Meshtastic LLC.
+      </p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
