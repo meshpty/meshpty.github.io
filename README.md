@@ -72,8 +72,13 @@ Los tres pendientes que había antes ya están resueltos:
 | Slot / frecuencia | 20 · 906.875 MHz (automático) |
 | Grupo de Facebook | `facebook.com/groups/4256086874610786` |
 | Contacto | Alvaro · alvaroenoht@gmail.com · nodos `Kmu` |
+| Nodos vistos en la malla | ≈40 |
+| Nodos fijos conocidos | 5+ |
+| Contacto confirmado más largo | 21.4 km (ciudad → Cerro Azul) |
 
 Si algo de esto cambia, está en todas las páginas — usa buscar y reemplazar.
+
+Las cifras de la red viven en dos `.ledger` gemelos: `index.html` ("Cómo está la red hoy") y `mapa.html` ("Lo que sabemos, honestamente"). Al actualizar una, actualiza la otra y el párrafo que va debajo.
 
 ---
 
