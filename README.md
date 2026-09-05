@@ -19,7 +19,7 @@ sin-senal.html     Saturación, apagones y Bocas del Toro
 legal.html         Regulación ASEP — PNAF, potencias, PIRE, fuentes
 faq.html           Preguntas frecuentes
 comunidad.html     Canales, radioaficionados, cómo ayudar
-meetups.html       Quedadas — próxima fecha, qué llevar, historial
+meetups.html       Meetups — próxima fecha, qué llevar, historial
 
 styles.css         Sistema visual completo
 favicon.svg        Grafo de malla
@@ -40,13 +40,13 @@ Los submenús se abren al pasar el mouse y al recibir foco con el teclado (`:hov
 
 ---
 
-## Mantener la quedada al día
+## Mantener el meetup al día
 
-Tres sitios traen la fecha escrita a mano. Al cambiar de quedada hay que tocar los tres:
+Tres sitios traen la fecha escrita a mano. Al cambiar de meetup hay que tocar los tres:
 
-1. `meetups.html` → bloque `.ledger` de "Próxima quedada" (fecha, hora, lugar y enlace de mapa).
-2. `index.html` y `comunidad.html` → la `<section class="aviso-quedada">`. **Cuando la fecha pase, se borra o se actualiza** — un aviso vencido en la portada es peor que ninguno.
-3. `meetups.html` → tabla "Quedadas anteriores": una fila con fecha, lugar y qué salió de ahí.
+1. `meetups.html` → bloque `.ledger` de "Próximo meetup" (fecha, hora, lugar y enlace de mapa).
+2. `index.html` y `comunidad.html` → la `<section class="aviso-meetup">`. **Cuando la fecha pase, se borra o se actualiza** — un aviso vencido en la portada es peor que ninguno.
+3. `meetups.html` → tabla "Meetups anteriores": una fila con fecha, lugar y qué salió de ahí.
 
 ---
 
