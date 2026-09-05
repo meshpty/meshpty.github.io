@@ -27,18 +27,15 @@ img/               Capturas de la app (ver img/LEEME.md)
 
 ---
 
-## ⚠️ Antes de publicar: 3 pendientes
+## Estado: todo publicado
 
-**1. Las capturas de pantalla.** `nodos-fijos.html` ya las está buscando en la carpeta `img/`. Hasta que las pongas, vas a ver imágenes rotas. Los nombres exactos y qué captura va en cada una están en **`img/LEEME.md`**. Son 7 archivos.
+Los tres pendientes que había antes ya están resueltos:
 
-**2. El enlace del grupo de WhatsApp.** En `comunidad.html`, busca `[falta pegar el enlace]`:
+- **Capturas de pantalla.** Las 8 imágenes están en `img/` y todas las referencias de los HTML apuntan a archivos que existen.
+- **Enlace del grupo de WhatsApp.** Ya está activo en `comunidad.html`, dentro de "Dónde encontrarnos".
+- **`og:image`.** Los 12 archivos apuntan a `https://meshpty.github.io/og.png`, que existe.
 
-- Pega el enlace de invitación en el `href="#"` de ese bloque.
-- Quita la clase `quiet` del `<a class="chan quiet">` para que deje de verse en gris (ahora mismo está deshabilitado a propósito: se ve, pero no es clicable, para no mandar a nadie a un enlace muerto).
-
-**3. La URL de `og:image`.** Los 9 archivos apuntan a `https://meshpty.github.io/og.png`. **Si usas otro dominio, hay que cambiar esa línea en los 9.** Facebook y WhatsApp necesitan una URL absoluta — con una relativa, la tarjeta al compartir sale vacía.
-
-Todo lo demás ya está con datos reales.
+Único aviso si algún día cambias de dominio: hay que actualizar esa línea de `og:image` en los 12 HTML. Facebook y WhatsApp necesitan una URL absoluta — con una relativa, la tarjeta al compartir sale vacía.
 
 ---
 
