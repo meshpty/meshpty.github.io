@@ -40,6 +40,16 @@ Los submenús se abren al pasar el mouse y al recibir foco con el teclado (`:hov
 
 ---
 
+## Mantener la quedada al día
+
+Tres sitios traen la fecha escrita a mano. Al cambiar de quedada hay que tocar los tres:
+
+1. `meetups.html` → bloque `.ledger` de "Próxima quedada" (fecha, hora, lugar y enlace de mapa).
+2. `index.html` y `comunidad.html` → la `<section class="aviso-quedada">`. **Cuando la fecha pase, se borra o se actualiza** — un aviso vencido en la portada es peor que ninguno.
+3. `meetups.html` → tabla "Quedadas anteriores": una fila con fecha, lugar y qué salió de ahí.
+
+---
+
 ## Estado: todo publicado
 
 Los tres pendientes que había antes ya están resueltos:
