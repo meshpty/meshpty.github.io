@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quedadas y meetups — MeshPTY</title>
+<meta name="description" content="Quedadas de la comunidad Meshtastic de Panamá: cuándo y dónde nos vemos, qué se hace en una quedada, qué llevar, y cómo proponer una en tu ciudad.">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#14181c">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MeshPTY">
+<meta property="og:title" content="Quedadas y meetups — MeshPTY">
+<meta property="og:description" content="Cuándo y dónde se junta la comunidad Meshtastic de Panamá. Pruebas de alcance, ayuda con la configuración, y nodos nuevos en la malla.">
+<meta property="og:image" content="https://meshpty.github.io/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<a class="skip" href="#main">Saltar al contenido</a>
+
+<nav>
+  <div class="wrap-wide">
+    <a class="brand" href="index.html"><span class="dot"></span>Mesh<b>PTY</b></a>
+    <div class="links">
+      <div class="menu">
+        <button class="mtrigger" type="button">Empezar</button>
+        <div class="drop">
+          <a href="comprar.html">Guía de compra</a>
+          <a href="instalar.html">Firmware y configuración</a>
+        </div>
+      </div>
+      <div class="menu">
+        <button class="mtrigger" type="button">La red</button>
+        <div class="drop">
+          <a href="nodos-fijos.html">Infraestructura</a>
+          <a href="roles.html">Roles de nodo</a>
+          <a href="mapa.html">Mapa y cobertura</a>
+          <a href="carta-azotea.html">Permiso de azotea</a>
+          <a href="mqtt.html">MQTT</a>
+        </div>
+      </div>
+      <div class="menu on">
+        <button class="mtrigger" type="button">Comunidad</button>
+        <div class="drop">
+          <a href="comunidad.html">Canales y grupos</a>
+          <a href="meetups.html" aria-current="page">Quedadas y meetups</a>
+        </div>
+      </div>
+      <div class="menu">
+        <button class="mtrigger" type="button">Ayuda</button>
+        <div class="drop">
+          <a href="faq.html">Preguntas frecuentes</a>
+          <a href="sin-senal.html">Cuando se cae la señal</a>
+          <a href="legal.html">Regulación (ASEP)</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+
+<div class="phead">
+  <div class="wrap">
+    <span class="eyebrow">Comunidad</span>
+    <h1>Quedadas y meetups</h1>
+    <p>
+      La malla se construye en persona. Dos nodos en la misma mesa se configuran en diez minutos;
+      por chat, en tres días.
+    </p>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <h2 class="mt0">Próxima quedada</h2>
+
+    <div class="ledger">
+      <dl>
+        <div class="row">
+          <dt>Fecha</dt>
+          <span class="lead" aria-hidden="true"></span>
+          <dd>Por confirmar</dd>
+        </div>
+        <div class="row">
+          <dt>Hora</dt>
+          <span class="lead" aria-hidden="true"></span>
+          <dd>Por confirmar</dd>
+        </div>
+        <div class="row">
+          <dt>Lugar</dt>
+          <span class="lead" aria-hidden="true"></span>
+          <dd>Por confirmar</dd>
+        </div>
+      </dl>
+    </div>
+
+    <p class="muted">
+      El plan de siempre: prueba de alcance por la ciudad, ayuda con la configuración a quien llegue
+      con nodo nuevo, y reparto de los puntos altos que siguen pendientes.
+    </p>
+
+    <div class="box info">
+      <h3>La fecha se anuncia primero en los grupos</h3>
+      <p class="mb0">
+        Confirmamos día y lugar por <a href="https://chat.whatsapp.com/BzUmXz6WWDqHfjFN73bdz8" target="_blank" rel="noopener">WhatsApp</a>
+        y por el <a href="https://www.facebook.com/groups/4256086874610786" target="_blank" rel="noopener">grupo de Facebook</a>,
+        y luego lo reflejamos aquí. Si vas a venir, avisa — así sabemos cuántos nodos esperar y
+        podemos repartir posiciones para la prueba de alcance.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Qué pasa en una quedada</h2>
+    <p class="sub">
+      No es una charla ni una conferencia. Es gente con radios encendidas en el mismo sitio,
+      probando hasta dónde llegan.
+    </p>
+
+    <div class="grid g2">
+      <div class="card">
+        <h3>Prueba de alcance real</h3>
+        <p class="mb0">
+          Nos separamos por la ciudad y medimos: cuántos saltos, con cuánto SNR, desde dónde. Es la
+          única forma honesta de saber qué cubre la malla — el mapa se llena con datos de estas
+          pruebas, no con suposiciones.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Configuración asistida</h3>
+        <p class="mb0">
+          Llegas con la placa recién comprada y te vas con el firmware puesto, la región correcta,
+          el canal <code>LongFast</code> estándar y el rol bien elegido. Lo que por chat toma días,
+          aquí toma un café.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Ver hardware ajeno</h3>
+        <p class="mb0">
+          Antenas, cajas estancas, montajes en mástil, baterías y solar. Ver el nodo de otro
+          resuelve más dudas de compra que cualquier tabla comparativa.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Repartir los puntos altos</h3>
+        <p class="mb0">
+          La conversación más útil de cada quedada: quién tiene acceso a qué azotea y quién puede
+          montar el próximo nodo fijo. <a href="nodos-fijos.html">Cómo se monta uno →</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Qué llevar</h2>
+
+    <div class="grid g2">
+      <div class="card">
+        <h3>Imprescindible</h3>
+        <ul class="check mb0">
+          <li><strong>Tu nodo</strong>, cargado, y el cable USB.</li>
+          <li><strong>El celular</strong> con la app de Meshtastic instalada y emparejada.</li>
+          <li><strong>Batería externa.</strong> Una tarde de pruebas vacía cualquier nodo.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Si lo tienes</h3>
+        <ul class="check mb0">
+          <li><strong>Antenas de repuesto</strong> para comparar en el mismo sitio y a la misma hora.</li>
+          <li><strong>Laptop</strong> para flashear al que llegue con la placa en blanco.</li>
+          <li><strong>Un nodo de sobra</strong> para prestarle a quien todavía no ha comprado.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="box ok">
+      <h3>¿No tienes nodo todavía?</h3>
+      <p class="mb0">
+        Ven igual. Es la mejor manera de decidir qué comprar: ves los aparatos funcionando,
+        preguntas lo que quieras, y te ahorras la placa equivocada.
+        <a href="comprar.html">Guía de compra →</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Quedadas anteriores</h2>
+    <p class="sub">Lo que salió de cada una, para que quede registro.</p>
+
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Lugar</th>
+            <th>Qué salió de ahí</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td colspan="3">Aún no hay quedadas registradas aquí. La próxima se documenta en esta tabla.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Organiza una en tu ciudad</h2>
+    <p class="muted">
+      Casi todo lo que se ha probado hasta ahora está en la Ciudad de Panamá, y eso es una
+      limitación, no una decisión. Chiriquí, Colón, Coclé, Azuero, Bocas — una malla local en
+      cualquiera de esos sitios arranca con tres personas que se pongan de acuerdo un sábado.
+    </p>
+
+    <ol class="steps">
+      <li>
+        <h3>Junta a dos personas más</h3>
+        <p>Con tres nodos ya se ven saltos reales. Con dos solo se ve un enlace directo.</p>
+      </li>
+      <li>
+        <h3>Escoge sitio abierto y alto</h3>
+        <p>
+          Un mirador, una azotea accesible, un parque sin edificios encima. Nada de sótanos ni
+          interiores de centro comercial.
+        </p>
+      </li>
+      <li>
+        <h3>Avísanos con una semana</h3>
+        <p>Lo publicamos aquí y en los grupos, y sale más gente de la que crees.</p>
+      </li>
+      <li>
+        <h3>Anota lo que midieron</h3>
+        <p>
+          Distancias, SNR y saltos. Eso alimenta el <a href="mapa.html">mapa de cobertura</a> y le
+          sirve al que llegue después.
+        </p>
+      </li>
+    </ol>
+
+    <hr class="rule">
+
+    <div class="cta">
+      <a class="btn primary" href="https://chat.whatsapp.com/BzUmXz6WWDqHfjFN73bdz8" target="_blank" rel="noopener">Proponer una quedada por WhatsApp →</a>
+      <a class="btn" href="mailto:alvaroenoht@gmail.com?subject=Quedada%20MeshPTY">Escribir por correo</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div class="col">
+        <h4>Empezar</h4>
+        <a href="comprar.html">Guía de compra</a>
+        <a href="instalar.html">Firmware y configuración</a>
+        <a href="faq.html">Preguntas frecuentes</a>
+      </div>
+      <div class="col">
+        <h4>La red</h4>
+        <a href="nodos-fijos.html">Infraestructura</a>
+        <a href="roles.html">Roles de nodo</a>
+        <a href="mapa.html">Mapa y cobertura</a>
+        <a href="carta-azotea.html">Permiso de azotea</a>
+        <a href="mqtt.html">Guía MQTT</a>
+        <a href="sin-senal.html">Cuando se cae la señal</a>
+        <a href="legal.html">Regulación (ASEP)</a>
+      </div>
+      <div class="col">
+        <h4>Comunidad</h4>
+        <a href="comunidad.html">Canales y grupos</a>
+        <a href="meetups.html">Quedadas y meetups</a>
+        <a href="https://meshtastic.org" target="_blank" rel="noopener">meshtastic.org</a>
+        <a href="https://discord.com/invite/ktMAKGBnBs" target="_blank" rel="noopener">Discord global</a>
+      </div>
+    </div>
+
+    <div class="fine">
+      <p>
+        <strong>MeshPTY</strong> — comunidad independiente de usuarios en Panamá.
+        Contacto: <a href="mailto:alvaroenoht@gmail.com">alvaroenoht@gmail.com</a>
+      </p>
+      <p>
+        MeshPTY es un grupo comunitario independiente y sin fines de lucro. <strong>No está
+        afiliado, patrocinado ni respaldado por Meshtastic LLC.</strong> Meshtastic® es una marca
+        registrada de Meshtastic LLC. Este sitio hace uso nominativo de la marca únicamente para
+        identificar el software del que somos usuarios.
+      </p>
+      <p>
+        Cada usuario es responsable de operar dentro de los límites de potencia y las bandas de
+        frecuencia permitidas por la <strong>ASEP</strong> en la República de Panamá.
+      </p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

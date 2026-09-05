@@ -149,27 +149,87 @@ nav .wrap-wide{display:flex;align-items:center;gap:28px;min-height:60px}
 }
 .brand b{color:var(--signal);font-weight:600}
 
+nav .wrap-wide{position:relative}
 nav .links{
-  margin-left:auto;display:flex;gap:22px;align-items:center;
-  overflow-x:auto;scrollbar-width:none;
-  -webkit-overflow-scrolling:touch;
+  margin-left:auto;display:flex;gap:26px;align-items:center;
 }
-nav .links::-webkit-scrollbar{display:none}
-nav .links a{
+
+/* enlaces sueltos (los que no cuelgan de un grupo) */
+nav .links > a,
+nav .links .mtrigger{
   font-family:var(--font-mono);
   font-size:.78rem;font-weight:500;letter-spacing:.04em;
   text-transform:uppercase;white-space:nowrap;
-  color:var(--ink-2);background-image:none;padding:20px 0;
-  border-bottom:2px solid transparent;
+  color:var(--ink-2);background:none;background-image:none;
+  border:0;border-bottom:2px solid transparent;
+  padding:20px 0;cursor:pointer;
   transition:color .18s var(--ease),border-color .18s var(--ease);
 }
-nav .links a:hover{color:var(--ink);border-bottom-color:var(--rule)}
-nav .links a[aria-current="page"]{color:var(--signal);border-bottom-color:var(--signal)}
+nav .links > a:hover{color:var(--ink);border-bottom-color:var(--rule)}
+nav .links > a[aria-current="page"]{color:var(--signal);border-bottom-color:var(--signal)}
+
+/* --- grupos con submenú: se abren al hover y al recibir foco --- */
+.menu{position:relative;display:flex;align-items:center}
+.menu .mtrigger{display:flex;align-items:center;gap:7px;font-family:var(--font-mono)}
+.menu .mtrigger::after{
+  content:"";width:5px;height:5px;flex:none;
+  border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;
+  transform:translateY(-2px) rotate(45deg);
+  transition:transform .18s var(--ease);
+}
+.menu:hover .mtrigger,
+.menu:focus-within .mtrigger{color:var(--ink);border-bottom-color:var(--rule)}
+.menu:hover .mtrigger::after,
+.menu:focus-within .mtrigger::after{transform:translateY(-4px) rotate(225deg)}
+.menu.on .mtrigger{color:var(--signal);border-bottom-color:var(--signal)}
+
+.drop{
+  position:absolute;top:100%;right:0;z-index:calc(var(--z-sticky) + 1);
+  min-width:250px;padding:6px 0;
+  background:var(--paper);
+  border:1px solid var(--rule-strong);border-top:0;
+  box-shadow:0 16px 34px rgba(20,24,28,.13);
+  display:none;
+}
+.menu:hover .drop,
+.menu:focus-within .drop{display:block}
+.drop a{
+  display:block;padding:11px 18px;
+  font-family:var(--font-mono);font-size:.75rem;letter-spacing:.03em;
+  color:var(--ink-2);background-image:none;
+  border-bottom:1px solid var(--rule);
+  transition:background-color .15s var(--ease),color .15s var(--ease);
+}
+.drop a:last-child{border-bottom:0}
+.drop a:hover{background:var(--paper-2);color:var(--ink)}
+.drop a[aria-current="page"]{color:var(--signal)}
 
 @media(max-width:900px){
-  nav .wrap-wide{gap:16px;padding-right:0}
-  nav .links{gap:18px;padding-right:24px;mask-image:linear-gradient(90deg,#000 88%,transparent)}
-  nav .links a{padding:18px 0;font-size:.74rem}
+  nav .wrap-wide{gap:14px;padding-right:24px}
+  nav .links{gap:16px}
+  nav .links > a,
+  nav .links .mtrigger{padding:18px 0;font-size:.72rem}
+  .menu{position:static}
+  .drop{left:0;right:0;min-width:0}
+  .drop a{padding:13px 24px}
+}
+/* móvil estrecho: la barra se parte en dos filas antes que desbordarse */
+@media(max-width:560px){
+  nav .wrap-wide{flex-wrap:wrap;padding-right:24px}
+  nav .brand{padding:14px 0 12px}
+  nav .links{
+    margin-left:0;width:100%;gap:4px 10px;
+    flex-wrap:wrap;justify-content:space-between;
+    border-top:1px solid var(--rule);
+  }
+  nav .links > a,
+  nav .links .mtrigger{padding:12px 0;font-size:.7rem;letter-spacing:.02em}
+  .menu .mtrigger{gap:5px}
+  .drop a{padding:14px 24px}
+}
+@media(max-width:360px){
+  nav .links > a,
+  nav .links .mtrigger{font-size:.64rem}
 }
 
 /* ============================================================

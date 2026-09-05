@@ -11,11 +11,15 @@ index.html         Inicio — malla animada, bitácora de la red, casos de uso
 comprar.html       Guía de compra — dos nodos, 915 vs 868, casillero, límite de 6 dBi
 instalar.html      Firmware — flasher + configuración estándar MeshPTY
 nodos-fijos.html   Infraestructura — hardware solar, CLIENT_BASE, posición fija, privacidad
-mapa.html          Registro de nodos y cobertura        (fuera del menú)
-sin-senal.html     Saturación, apagones y Bocas del Toro (fuera del menú)
-legal.html         Regulación ASEP — PNAF, potencias, PIRE, fuentes (fuera del menú)
+roles.html         Roles de nodo — cuál poner y por qué
+carta-azotea.html  Carta modelo para pedir permiso de azotea
+mqtt.html          Guía MQTT
+mapa.html          Registro de nodos y cobertura
+sin-senal.html     Saturación, apagones y Bocas del Toro
+legal.html         Regulación ASEP — PNAF, potencias, PIRE, fuentes
 faq.html           Preguntas frecuentes
 comunidad.html     Canales, radioaficionados, cómo ayudar
+meetups.html       Quedadas — próxima fecha, qué llevar, historial
 
 styles.css         Sistema visual completo
 favicon.svg        Grafo de malla
@@ -23,7 +27,16 @@ og.png             1200×630 — la tarjeta que sale al compartir el link
 img/               Capturas de la app (ver img/LEEME.md)
 ```
 
-**Tres páginas están fuera del menú a propósito.** Un nav de nueve elementos no es una jerarquía. Mapa, Sin señal y Legal se alcanzan desde el contenido y desde el pie de página, que es donde la gente llega a ellas con una pregunta concreta en la cabeza.
+**El menú son cuatro grupos, no trece enlaces.** Un nav plano de trece elementos no es una jerarquía:
+
+```
+Empezar    → comprar · instalar
+La red     → nodos-fijos · roles · mapa · carta-azotea · mqtt
+Comunidad  → comunidad · meetups
+Ayuda      → faq · sin-senal · legal
+```
+
+Los submenús se abren al pasar el mouse y al recibir foco con el teclado (`:hover` + `:focus-within`), sin una línea de JavaScript. En pantallas angostas la barra se parte en dos filas y el panel ocupa todo el ancho.
 
 ---
 
