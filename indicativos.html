@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Indicativos para nodos — MeshPTY</title>
+<meta name="description" content="Convención opcional de cuatro caracteres para nombrar nodos Meshtastic, prestada de los SSID de APRS. Para que se sepa de un vistazo cuál nodo es personal y cuál es infraestructura.">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#14181c">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="MeshPTY">
+<meta property="og:title" content="Indicativos para nodos — MeshPTY">
+<meta property="og:description" content="Meshtastic no tiene alias: el nombre es todo lo que hay. Una guía opcional para quien maneja varios nodos.">
+<meta property="og:image" content="https://meshpty.github.io/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<a class="skip" href="#main">Saltar al contenido</a>
+
+<nav>
+  <div class="wrap-wide">
+    <a class="brand" href="index.html"><span class="dot"></span>Mesh<b>PTY</b></a>
+    <div class="links">
+      <div class="menu">
+        <button class="mtrigger" type="button">Empezar</button>
+        <div class="drop">
+          <a href="comprar.html">Guía de compra</a>
+          <a href="instalar.html">Firmware y configuración</a>
+        </div>
+      </div>
+      <div class="menu on">
+        <button class="mtrigger" type="button">La red</button>
+        <div class="drop">
+          <a href="nodos-fijos.html">Infraestructura</a>
+          <a href="roles.html">Roles de nodo</a>
+          <a href="indicativos.html" aria-current="page">Indicativos</a>
+          <a href="mapa.html">Mapa y cobertura</a>
+          <a href="carta-azotea.html">Permiso de azotea</a>
+          <a href="mqtt.html">MQTT</a>
+        </div>
+      </div>
+      <div class="menu">
+        <button class="mtrigger" type="button">Comunidad</button>
+        <div class="drop">
+          <a href="comunidad.html">Canales y grupos</a>
+          <a href="meetups.html">Meetups</a>
+        </div>
+      </div>
+      <div class="menu">
+        <button class="mtrigger" type="button">Ayuda</button>
+        <div class="drop">
+          <a href="faq.html">Preguntas frecuentes</a>
+          <a href="sin-senal.html">Cuando se cae la señal</a>
+          <a href="legal.html">Regulación (ASEP)</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+
+<div class="phead">
+  <div class="wrap">
+    <span class="eyebrow">Convención opcional</span>
+    <h1>Indicativos para nodos</h1>
+    <p>
+      Un esquema de cuatro caracteres para nombrar nodos, copiado de cómo los operadores de APRS
+      marcan sus estaciones desde hace décadas. Dos letras dicen <strong>quién</strong>, dos dígitos
+      dicen <strong>qué</strong>. <strong>Nadie está obligado a usarlo:</strong> ponle a tu nodo el
+      nombre que quieras y como quieras. Esto es una guía para quien termina manejando varios.
+    </p>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <h2 class="mt0">Meshtastic no tiene alias</h2>
+    <p>
+      No hay lista de contactos, ni perfil, ni mensaje de ausencia. Lo que ves en la lista de nodos
+      es un nombre corto, un nombre largo y nada más. Así que la pregunta que aparece una y otra vez
+      — <em>¿hay una persona detrás de este nodo, o es una caja en una azotea?</em> — no tiene
+      respuesta a menos que alguien la haya escrito en el nombre.
+    </p>
+
+    <div class="grid g2">
+      <div class="card">
+        <h3>Sin convención</h3>
+        <ul class="ind-list">
+          <li><span class="sn">TBeam</span> <span class="q">¿placa suelta en un escritorio, o en una torre?</span></li>
+          <li><span class="sn">Node</span> <span class="q">nombre de fábrica, nunca lo cambiaron</span></li>
+          <li><span class="sn">Casa</span> <span class="q">¿una persona, o un repetidor de azotea?</span></li>
+          <li><span class="sn">🌮</span> <span class="q">ni idea; mandas el mensaje y rezas</span></li>
+        </ul>
+        <p class="small muted" style="margin-top:14px">
+          O le escribes a una azotea y esperas sentado, o te quedas callado y nunca alcanzas a la
+          persona que sí estaba escuchando.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Con una</h3>
+        <ul class="ind-list">
+          <li><span class="sn">KM01</span> infraestructura — no esperes respuesta</li>
+          <li><span class="sn">KM11</span> infraestructura — repetidor de azotea</li>
+          <li><span class="sn">KM40</span> <strong>companion</strong> — alguien lo lleva encima</li>
+          <li><span class="sn">KM50</span> <strong>móvil</strong> — alguien, en el carro</li>
+        </ul>
+        <p class="small muted" style="margin-top:14px">
+          Los mismos cuatro bytes. Ahora la lista te dice a quién escribirle y por quién solo
+          enrutar.
+        </p>
+      </div>
+    </div>
+
+    <div class="box ok">
+      <h3>Si te llevas una sola cosa de esta página</h3>
+      <p class="mb0">
+        <strong>Que el nombre diga si el nodo es personal o infraestructura.</strong> Si lo haces con
+        este esquema, con tu propia numeración, o pegándole la palabra <code>movil</code> al final,
+        es cosa tuya. No te cuesta nada y le ahorra la adivinanza a todos los demás.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="anatomia">
+  <div class="wrap">
+    <h2>Anatomía del indicativo</h2>
+    <p class="sub">Dos letras de operador + dos dígitos de clase.</p>
+
+    <div class="ind-stage">
+      <p class="ind-screen">Nombre corto · <span class="lv">● al aire</span></p>
+      <p class="ind-tag"><span class="op">KM</span>10</p>
+      <p class="ind-brace"><span>operador</span><span>clase</span></p>
+    </div>
+
+    <div class="grid g2">
+      <div class="card">
+        <h3><code>KM</code> — prefijo de operador</h3>
+        <p class="mb0">
+          Quién es el dueño y lo mantiene. Todos los nodos de una misma persona comparten esas dos
+          letras, igual que todas las estaciones APRS comparten un indicativo. Iniciales, un apodo,
+          lo que sea — solo tienen que ser tuyas y no cambiar.
+        </p>
+      </div>
+      <div class="card">
+        <h3><code>10</code> — número de clase</h3>
+        <p class="mb0">
+          Qué tipo de nodo es y cuál de ellos. El dígito de las <strong>decenas</strong> es la clase
+          (azotea, gateway, rastreador…); el de las <strong>unidades</strong> es el índice dentro de
+          esa clase. <code>10</code> es la primera azotea, <code>11</code> la segunda.
+        </p>
+      </div>
+    </div>
+
+    <div class="box info">
+      <h3>¿Por qué cuatro caracteres?</h3>
+      <p>
+        El nombre corto de Meshtastic está topado en <strong>4 bytes</strong> — es la etiqueta que
+        sale en la pantalla del nodo y en la lista de todo el mundo. Dos + dos gasta cada byte y no
+        deja nada que se corte.
+      </p>
+      <p class="mb0">
+        <strong>¿Un solo nodo?</strong> Ponle el nombre que te dé la gana y sáltate el resto. Esta
+        división empieza a valer la pena como al tercer o cuarto nodo, cuando ya no te acuerdas cuál
+        <code>TBeam</code> es el de la azotea.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="aprs">
+  <div class="wrap">
+    <h2>APRS resolvió esto en los noventa</h2>
+    <p>
+      En APRS, el ID de una estación es el indicativo más un <em>SSID</em>: un sufijo numérico que le
+      dice a todos qué tipo de estación es, sin tener que buscar en ningún lado.
+      <code>N0CALL-9</code> es un carro; <code>-10</code> es una puerta de enlace a internet. Este
+      esquema se queda con la idea y cambia las piezas — el indicativo pasa a ser un prefijo de dos
+      letras, y el SSID pasa a ser un bloque de dos dígitos.
+    </p>
+
+    <div class="grid g2">
+      <div class="card">
+        <h3>Estación APRS — <code>N0CALL-9</code></h3>
+        <ul class="ind-list">
+          <li><span class="sn">-0</span> fija principal, recibe mensajes</li>
+          <li><span class="sn">-9</span> móvil principal — el carro</li>
+          <li><span class="sn">-10</span> internet / iGate</li>
+          <li><span class="sn">-12</span> rastreadores de una vía</li>
+          <li><span class="sn">-13</span> estaciones meteorológicas</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Nodo de malla — <code>KM50</code></h3>
+        <ul class="ind-list">
+          <li><span class="sn">00–09</span> cimas y torres (routers)</li>
+          <li><span class="sn">50–59</span> móvil — el carro</li>
+          <li><span class="sn">30–39</span> gateways / puentes MQTT</li>
+          <li><span class="sn">60–69</span> rastreadores</li>
+          <li><span class="sn">10–19</span> repetidores de azotea</li>
+        </ul>
+      </div>
+    </div>
+    <p class="muted small" style="margin-top:18px">
+      indicativo → prefijo de operador &nbsp;·&nbsp; SSID → bloque de clase
+    </p>
+  </div>
+</section>
+
+<section id="numeracion">
+  <div class="wrap">
+    <h2>El plan de numeración</h2>
+    <p>
+      Las cien casillas se parten en bandas de diez. Lees el dígito de las decenas y ya sabes para
+      qué sirve el nodo, qué lugar ocupa en la red y cómo debería estar el
+      <a href="roles.html">rol de su radio</a>. Las bandas <code>40–59</code> son las que alguien
+      carga encima: esos son los nodos a los que vale la pena escribirle. Todo lo de abajo de
+      <code>40</code> es una caja haciendo su trabajo.
+    </p>
+
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead>
+          <tr><th>Bloque</th><th>Clase</th><th>Rol</th><th>Etiqueta</th><th>¿Quién contesta?</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>00–09</code></td><td>Cimas y torres</td><td><code>ROUTER</code></td><td><code>R</code></td><td><span class="who who-infra">nadie</span></td></tr>
+          <tr><td><code>10–19</code></td><td>Azoteas de edificios</td><td><code>ROUTER_LATE</code></td><td><code>RL</code></td><td><span class="who who-infra">nadie</span></td></tr>
+          <tr><td><code>20–29</code></td><td>Calle y balcones (relleno)</td><td><code>CLIENT</code> / <code>ROUTER_LATE</code></td><td class="muted">—</td><td><span class="who who-infra">nadie</span></td></tr>
+          <tr><td><code>30–39</code></td><td>Gateways — MQTT / internet</td><td><code>CLIENT</code></td><td><code>GW</code></td><td><span class="who who-infra">nadie</span></td></tr>
+          <tr><td><code>40–49</code></td><td><strong>Companion (personales)</strong></td><td><code>CLIENT_MUTE</code></td><td class="muted">—</td><td><span class="who who-persona">una persona</span></td></tr>
+          <tr><td><code>50–59</code></td><td><strong>Móviles y temporales</strong></td><td><code>CLIENT</code></td><td class="muted">—</td><td><span class="who who-persona">una persona</span></td></tr>
+          <tr><td><code>60–69</code></td><td>Rastreadores</td><td><code>TRACKER</code></td><td class="muted">—</td><td><span class="who who-infra">nadie</span></td></tr>
+          <tr><td><code>70–99</code></td><td>Reservado y experimental</td><td class="muted">—</td><td class="muted">—</td><td class="muted">—</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box warn">
+      <h3>La clase habla del rol, no del hardware</h3>
+      <p class="mb0">
+        La misma placa puede ser una azotea <code>10</code> hoy y un rastreador <code>60</code>
+        mañana. La renumeras cuando le cambia el trabajo, no cuando la reflasheas. La etiqueta física
+        del equipo se queda con un serial simple de por vida; el indicativo es la identidad al aire,
+        y esa sí se mueve.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="nombre-largo">
+  <div class="wrap">
+    <h2>El nombre largo lleva el sitio y el rol</h2>
+    <p>
+      El indicativo de cuatro caracteres es el apodo. Meshtastic también le da a cada nodo un
+      <strong>nombre largo</strong> — hasta <strong>39 bytes</strong> — que se ve en la app y en el
+      mapa. Para cualquier nodo que le sirva a la malla pública, gasta esos bytes en decirle al
+      desconocido qué está escuchando: indicativo, dónde vive y su etiqueta de rol.
+    </p>
+
+    <div class="ind-stage" style="text-align:left">
+      <p class="ind-screen">Nombre largo · ≤ 39 bytes</p>
+      <p class="ind-long"><span class="op">KM11</span> Obarrio <span class="tags">RL·SF</span></p>
+      <p class="small muted" style="margin:14px 0 0">
+        indicativo · sitio · etiquetas de rol — cualquiera que mire la lista sabe que es un repetidor
+        de azotea en Obarrio, con almacenar y reenviar prendido.
+      </p>
+    </div>
+
+    <div class="ind-gloss">
+      <div><span class="gt">R</span><div><b>Router</b><span class="d">Cima o torre — lo más alto de la malla, retransmite de primero.</span></div></div>
+      <div><span class="gt">RL</span><div><b>Router Late</b><span class="d">Repetidor de azotea — retransmite después del montón, sin pisar a nadie.</span></div></div>
+      <div><span class="gt">SF</span><div><b>Store &amp; Forward</b><span class="d">Guarda mensajes para los nodos que estaban dormidos o fuera de alcance.</span></div></div>
+      <div><span class="gt">GW</span><div><b>Gateway</b><span class="d">Conecta la malla con MQTT / internet.</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="ejemplos">
+  <div class="wrap">
+    <h2>Leer la red de un vistazo</h2>
+    <p>
+      Seis nodos, descifrados. Cuando el esquema ya está en tu cabeza, la lista de nodos deja de ser
+      una pared de nombres y pasa a ser un mapa — y los de los <code>40</code> y <code>50</code> son
+      los que tienen un humano pegado. Los sitios de abajo son de ejemplo.
+    </p>
+
+    <div class="ind-ex">
+      <div class="card">
+        <p class="ind-ct"><span class="op">KM</span>01</p>
+        <dl class="ind-dl">
+          <dt>Clase</dt><dd>Router de cima</dd>
+          <dt>Rol</dt><dd><code>ROUTER</code></dd>
+          <dt>Contesta</dt><dd>nadie — es infraestructura</dd>
+          <dt>Nombre largo</dt><dd><code>KM01 Cerro R</code></dd>
+        </dl>
+      </div>
+      <div class="card">
+        <p class="ind-ct"><span class="op">KM</span>11</p>
+        <dl class="ind-dl">
+          <dt>Clase</dt><dd>Repetidor de azotea</dd>
+          <dt>Rol</dt><dd><code>ROUTER_LATE</code> + S&amp;F</dd>
+          <dt>Contesta</dt><dd>nadie — es infraestructura</dd>
+          <dt>Nombre largo</dt><dd><code>KM11 Obarrio RL·SF</code></dd>
+        </dl>
+      </div>
+      <div class="card">
+        <p class="ind-ct"><span class="op">KM</span>30</p>
+        <dl class="ind-dl">
+          <dt>Clase</dt><dd>Gateway MQTT</dd>
+          <dt>Rol</dt><dd><code>CLIENT</code></dd>
+          <dt>Contesta</dt><dd>nadie — es infraestructura</dd>
+          <dt>Nombre largo</dt><dd><code>KM30 iGate Casa GW</code></dd>
+        </dl>
+      </div>
+      <div class="card">
+        <p class="ind-ct"><span class="op">KM</span>40</p>
+        <dl class="ind-dl">
+          <dt>Clase</dt><dd>Companion personal</dd>
+          <dt>Rol</dt><dd><code>CLIENT_MUTE</code></dd>
+          <dt>Contesta</dt><dd class="persona">una persona — escríbele</dd>
+          <dt>Nombre largo</dt><dd><code>KM40 Alvaro</code></dd>
+        </dl>
+      </div>
+      <div class="card">
+        <p class="ind-ct"><span class="op">KM</span>50</p>
+        <dl class="ind-dl">
+          <dt>Clase</dt><dd>Móvil de carro</dd>
+          <dt>Rol</dt><dd><code>CLIENT</code></dd>
+          <dt>Contesta</dt><dd class="persona">una persona — si va manejando, espera</dd>
+          <dt>Nombre largo</dt><dd><code>KM50 Movil</code></dd>
+        </dl>
+      </div>
+      <div class="card">
+        <p class="ind-ct"><span class="op">KM</span>61</p>
+        <dl class="ind-dl">
+          <dt>Clase</dt><dd>Rastreador GPS</dd>
+          <dt>Rol</dt><dd><code>TRACKER</code></dd>
+          <dt>Contesta</dt><dd>nadie — solo reporta posición</dd>
+          <dt>Nombre largo</dt><dd><code>KM61 Tracker</code></dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="box info">
+      <h3>Cópialo, dóblalo o ignóralo</h3>
+      <p class="mb0">
+        Aquí no hay nada propietario ni nada obligatorio: es sentido común de APRS apuntado a una
+        malla, escrito para quien le sirva. Llévate el esquema completo, llévate el plan de
+        numeración con otras letras, o llévate solamente la idea de que el nombre debería decir si
+        hay alguien del otro lado. Una malla donde la mitad de los nodos sigue una convención ya se
+        lee mejor que una donde no la sigue ninguno. Linaje:
+        <a href="https://github.com/aprsorg/aprs-deviceid" target="_blank" rel="noopener">recomendaciones de SSID de APRS</a>.
+      </p>
+    </div>
+
+    <hr class="rule">
+
+    <div class="cta">
+      <a class="btn primary" href="roles.html">Qué rol ponerle a tu nodo →</a>
+      <a class="btn" href="nodos-fijos.html">Montar un nodo fijo</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div class="col">
+        <h4>Empezar</h4>
+        <a href="comprar.html">Guía de compra</a>
+        <a href="instalar.html">Firmware y configuración</a>
+        <a href="faq.html">Preguntas frecuentes</a>
+      </div>
+      <div class="col">
+        <h4>La red</h4>
+        <a href="nodos-fijos.html">Infraestructura</a>
+        <a href="roles.html">Roles de nodo</a>
+        <a href="indicativos.html">Indicativos</a>
+        <a href="mapa.html">Mapa y cobertura</a>
+        <a href="carta-azotea.html">Permiso de azotea</a>
+        <a href="mqtt.html">Guía MQTT</a>
+        <a href="sin-senal.html">Cuando se cae la señal</a>
+        <a href="legal.html">Regulación (ASEP)</a>
+      </div>
+      <div class="col">
+        <h4>Comunidad</h4>
+        <a href="comunidad.html">Canales y grupos</a>
+        <a href="meetups.html">Meetups</a>
+        <a href="https://meshtastic.org" target="_blank" rel="noopener">meshtastic.org</a>
+        <a href="https://discord.com/invite/ktMAKGBnBs" target="_blank" rel="noopener">Discord global</a>
+      </div>
+    </div>
+
+    <div class="fine">
+      <p>
+        <strong>MeshPTY</strong> — comunidad independiente de usuarios en Panamá.
+        Contacto: <a href="mailto:alvaroenoht@gmail.com">alvaroenoht@gmail.com</a>
+      </p>
+      <p>
+        MeshPTY es un grupo comunitario independiente y sin fines de lucro. <strong>No está
+        afiliado, patrocinado ni respaldado por Meshtastic LLC.</strong> Meshtastic® es una marca
+        registrada de Meshtastic LLC.
+      </p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

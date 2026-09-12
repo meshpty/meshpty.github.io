@@ -1021,3 +1021,100 @@ figure.diagram figcaption{
 /* Sí / No en tablas de compatibilidad */
 table.tbl td.y{color:var(--live);font-weight:600}
 table.tbl td.n{color:var(--signal);font-weight:600}
+
+/* ============================================================
+   INDICATIVOS — anatomía del nombre corto de 4 bytes.
+   Solo lo usa indicativos.html; el resto es sistema base.
+   ============================================================ */
+.ind-stage{
+  border:1px solid var(--rule);
+  background:var(--paper-2);
+  padding:34px 26px 26px;
+  margin:0 0 26px;
+  text-align:center;
+}
+.ind-screen{
+  font-family:var(--font-mono);
+  font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-3);margin:0 0 20px;
+}
+.ind-screen .lv{color:var(--live)}
+.ind-tag{
+  font-family:var(--font-mono);font-weight:600;
+  font-size:clamp(3.2rem,13vw,5.6rem);line-height:1;letter-spacing:.02em;
+  color:var(--ink);margin:0;
+}
+.ind-tag .op{color:var(--signal)}
+.ind-brace{
+  display:flex;margin:10px auto 0;max-width:9ch;
+  font-family:var(--font-mono);font-size:.7rem;letter-spacing:.08em;
+  color:var(--ink-3);text-transform:uppercase;
+}
+.ind-brace span{flex:1}
+
+/* listas de nodos simuladas (el "antes y después") */
+.ind-list{list-style:none;margin:0;padding:0}
+.ind-list li{
+  display:flex;gap:12px;align-items:baseline;
+  padding:9px 0;border-bottom:1px solid var(--rule);
+  font-size:.92rem;color:var(--ink-2);
+}
+.ind-list li:last-child{border-bottom:0}
+.ind-list .sn{
+  font-family:var(--font-mono);font-weight:600;color:var(--ink);
+  min-width:5.5ch;flex:none;
+}
+.ind-list .q{color:var(--ink-3);font-style:italic}
+
+/* quién contesta: la columna que importa */
+.who{font-family:var(--font-mono);font-size:.8rem;letter-spacing:.02em}
+.who-persona{color:var(--live);font-weight:600}
+.who-infra{color:var(--ink-3)}
+
+/* nombre largo de ejemplo */
+.ind-long{
+  font-family:var(--font-mono);font-weight:600;
+  font-size:clamp(1.05rem,3.4vw,1.5rem);letter-spacing:.01em;
+  color:var(--ink);margin:0;
+}
+.ind-long .op{color:var(--signal)}
+.ind-long .tags{color:var(--live)}
+
+/* fichas de ejemplo */
+.ind-ex{
+  display:grid;gap:0;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  column-gap:38px;
+}
+.ind-ct{
+  font-family:var(--font-mono);font-weight:600;
+  font-size:2rem;line-height:1;letter-spacing:.02em;
+  margin:0 0 14px;color:var(--ink);
+}
+.ind-ct .op{color:var(--signal)}
+.ind-dl{margin:0;font-size:.9rem}
+.ind-dl dt{
+  font-family:var(--font-mono);
+  font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-3);margin-top:10px;
+}
+.ind-dl dt:first-child{margin-top:0}
+.ind-dl dd{margin:2px 0 0;color:var(--ink-2)}
+.ind-dl dd.persona{color:var(--live);font-weight:600}
+
+/* glosario de etiquetas de rol */
+.ind-gloss{
+  display:grid;gap:0;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  column-gap:38px;
+}
+.ind-gloss div{
+  display:flex;gap:14px;align-items:baseline;
+  padding:14px 0;border-bottom:1px solid var(--rule);
+}
+.ind-gloss .gt{
+  font-family:var(--font-mono);font-weight:600;color:var(--signal);
+  min-width:3ch;flex:none;
+}
+.ind-gloss b{display:block;font-size:.95rem}
+.ind-gloss span.d{font-size:.88rem;color:var(--ink-2);line-height:1.5}
